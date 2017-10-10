@@ -20,7 +20,7 @@ var vd = (function($) {
 
 			this.disabled = function(obj) {
 
-				$(obj).addAttr("disabled", "disabled");
+				$(obj).attr("disabled", "disabled");
 
 			},
 
