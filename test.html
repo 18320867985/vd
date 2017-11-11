@@ -10,36 +10,9 @@
 		<title>写邮件 </title>
 	
 		<link rel="stylesheet" href="mui.css" />
+		<link rel="stylesheet" type="text/css" href="vd.css"/>
 		
-		<style type="text/css">
-			.vd-error.mui-table-view-cell label,
-			.vd-error.mui-table-view-cell input[type=text] {
-				color: red;
-			}
-			
-			.vd-ok.mui-table-view-cell label,
-			.vd-ok.mui-table-view-cell input[type=text] {
-				color: green;
-			}
-			.vd-box .dep-btn {
-				color: #ddd;
-			}
-			.vd-box .vd-dep-btn.vd-ok {
-				color: green;
-			}
-			
-			.vd-box.mui-table-view-cell .dep-btn.vd-error {
-				color: #ddd;
-			}
-			.vd-btn.vd-error{
-				background: red;
-				color:white
-			}
-			.vd-btn.vd-ok{
-				background: green;
-				color:white
-			}
-		</style>
+		
 	</head>
 
 	<body class="bg-white">
@@ -47,7 +20,7 @@
 		<header class="rwinfo-head mui-bar mui-bar-nav bg-white ">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left text-base"></a>
 			<h1 class="mui-title">写信息</h1>
-			<span class="rwinfo-head-send mui-pull-right">发送</span>
+		
 		</header>
 
 		<!--主体内容-->
@@ -61,7 +34,8 @@
 						<label class="a" for="">收件人:</label>
 
 						<input class="vd-item" type="text" name="a"   vd-pattern="^[a-zA-Z0-9]{1,32}[@][a-zA-Z0-9]{1,16}\.[a-zA-Z]{1,16}$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
-
+						
+						<span class=" vd-pattern"></span>
 					</li>
 					<li class="mui-table-view-cell mui-clearfix vd-box">
 						<label for="">手机:</label>
@@ -71,7 +45,10 @@
 							 
 							 name="c" id="" value="1224" placeholder="输入正确手机号码" />
 						<!--依赖的按钮-->
-						<span class="vd-dep-btn error  mui-btn">发送验证码</span>
+						<span class="vd-dep-btn   mui-btn">发送验证码</span>
+						
+							<span class="vd-req "></span>
+							<span class="vd-pattern"> 手机格式不对</span>
 					</li>
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label for="">验证码:</label>
@@ -80,6 +57,11 @@
 							vd-remote-length="6" vd-remote="json/remote.json"
 							 vd-remote-msg="验证码不对" name="yzm" maxlength="6" value=""
 							  placeholder="输入验证码" />
+							  
+						 <span class="vd-req "></span>
+						
+						<span class="vd-remote"></span>
+						
 
 					</li>
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
@@ -87,19 +69,26 @@
 
 						<input  class="vd-item"  type="text" name="pwd"  vd-req vd-req-msg="密码不能为空"
 							 vd-compare-emit="pwd2"  vd-pattern="^\S{8,32}$" vd-pattern-msg="密码长度8到32位" value="" placeholder="输入密码" />
-
+ 						<span class="vd-req "></span>
+						<span class="vd-pattern"> 手机格式不对</span>
 					</li>
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label class="a" for="">确认密码:</label>
 
 						<input class="vd-item"  type="text" name="pwd2"  vd-req vd-req-msg="密码不能为空" 
 							 vd-compare="pwd"  vd-compare-msg="两次密码不能相同"  value="" placeholder="输入密码" />
+							 
+							 <span class="vd-req "></span>
+						<span class="vd-compare"> </span>
 
 					</li>
 
 					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
 						<label for="">内容:</label>
 						<textarea  class="vd-item"  name="cont" rows="" vd-req vd-req-msg="内容不能为空" cols="" placeholder="输入内容"></textarea>
+						
+						<span class="vd-req "></span>
+						<span class="vd-remote"></span>
 					</li>
 					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
 						<label for="">单选:</label>
@@ -138,7 +127,7 @@
 			// 初始化验证对象
 			var vd1=vd.create(".form1");
 			vd1.init();
-			$(".rwinfo-head-send").on("click", function() {
+			$(".vd-btn").on("click", function() {
 	
 					// 是否验证成功
 					vd1.isSuccess(function(obj) {
