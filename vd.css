@@ -1,3 +1,5 @@
+
+/*错误显示*/
 .vd-box .vd-req,
 .vd-box .vd-pattern,
 .vd-box .vd-remote,
@@ -32,12 +34,22 @@
 	color: green;
 }
 
+/*提交按钮*/
+.vd-btn.vd-ok{
+	
+	color:green;
+}
+
+
+
+
 /*当前的元素error*/
 
 .vd-box.vd-error .vd-item.vd-error {
 	color: red;
 	border: 1px solid red;
 }
+
 
 .vd-box.vd-error label {
 	color: red;
@@ -46,4 +58,8 @@
 	color: red;
 }
 
-
+/*提交按钮*/
+.vd-btn.vd-error{
+	
+	color:red;
+}
