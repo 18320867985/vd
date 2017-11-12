@@ -42,20 +42,24 @@
 
 						<input class="vd-item"  type="text" vd-req vd-req-msg="手机号码不能为空"
 							 vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" 
-							 
+							 	vd-remote="json/remote.json"	
+							 vd-remote-msg="验证码不对"
 							 name="c" id="" value="1224" placeholder="输入正确手机号码" />
 						<!--依赖的按钮-->
 						<span class="vd-dep-btn   mui-btn">发送验证码</span>
 						
 							<span class="vd-req "></span>
-							<span class="vd-pattern"> 手机格式不对</span>
+							<span class="vd-pattern"> </span>
+								<span class="vd-remote"> </span>
 					</li>
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label for="">验证码:</label>
 
 						<input  class="vd-item"  type="text" vd-req vd-req-msg="验证码不能为空" 
-							vd-remote-length="6" vd-remote="json/remote.json"
+							vd-remote="json/remote.json"	vd-remote-length="6" 
 							 vd-remote-msg="验证码不对" name="yzm" maxlength="6" value=""
+							 
+							 
 							  placeholder="输入验证码" />
 							  
 						 <span class="vd-req "></span>
@@ -68,7 +72,9 @@
 						<label class="a" for="">密码:</label>
 
 						<input  class="vd-item"  type="text" name="pwd"  vd-req vd-req-msg="密码不能为空"
-							 vd-compare-emit="pwd2"  vd-pattern="^\S{8,32}$" vd-pattern-msg="密码长度8到32位" value="" placeholder="输入密码" />
+							 vd-compare-emit="pwd2"  vd-pattern="^\S{8,32}$" vd-pattern-msg="密码长度8到32位"
+							 
+							  value="" placeholder="输入密码" />
  						<span class="vd-req "></span>
 						<span class="vd-pattern"> 手机格式不对</span>
 					</li>
@@ -126,6 +132,7 @@
 		
 			// 初始化验证对象
 			var vd1=vd.create(".form1");
+			
 			vd1.init();
 			$(".vd-btn").on("click", function() {
 	
@@ -146,7 +153,16 @@
 					});	
 			});
 			
+		// 发送验证码
+		$(".vd-dep-btn ").click(function(){
 			
+			// 根据name属性获取对象
+			if(vd1.getObj("c").bl){
+				
+				alert("已发送验证码");
+			}; 
+			
+		});
 				
 				
 			

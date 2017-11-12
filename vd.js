@@ -230,9 +230,9 @@ var vd = (function($) {
 						_obj2.val = v;
 						_obj2.errorMsg = _req_msg;
 						var p = $(el).parents(".vd-box");
-						$(p).removeClass("vd-pattern vd-remote vd-compare").addClass("vd-error vd-req ");
+						$(p).removeClass("vd-pattern vd-remote vd-compare").addClass("vd-error  ");
 						
-						$(p).find(".vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
+						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
 						$(p).find(".vd-req").addClass("vd-error").text(_req_msg);
 						$(el).addClass("vd-error");
 						$(p).removeClass("vd-ok ");
@@ -247,7 +247,7 @@ var vd = (function($) {
 							_obj2.val = v;
 							_obj2.bl = true;
 							var p = $(el).parents(".vd-box");
-							$(p).removeClass("vd-error vd-req ");
+							$(p).removeClass("vd-error ");
 							
 							$(p).find(".vd-req").removeClass("vd-error").text("");
 							$(el).removeClass("vd-error");
@@ -274,7 +274,9 @@ var vd = (function($) {
 						_obj2.bl = false;
 						_obj2.val = v;
 						var p = $(el).parents(".vd-box");
-						$(p).addClass("vd-error vd-pattern");
+						$(p).addClass("vd-error");
+						
+						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
 						
 						$(p).find(".vd-pattern").addClass("vd-error").text( _pattern_msg);
 						$(el).addClass("vd-error");
@@ -287,7 +289,7 @@ var vd = (function($) {
 						_obj2.val = v;
 						_obj2.bl = true;
 						var p = $(el).parents(".vd-box");
-						$(p).removeClass("vd-error vd-pattern");
+						$(p).removeClass("vd-error ");
 						
 						$(p).find(".vd-pattern").removeClass("vd-error").text("");
 						$(el).removeClass("vd-error");
@@ -304,7 +306,7 @@ var vd = (function($) {
 						_obj2.val = v;
 						_obj2.bl = true;
 						var p = $(el).parents(".vd-box");
-						$(p).removeClass("vd-error vd-pattern");
+						$(p).removeClass("vd-error ");
 						
 						$(p).find(".vd-pattern").removeClass("vd-error").text("");
 						$(el).removeClass("vd-error");
@@ -324,8 +326,9 @@ var vd = (function($) {
 						_obj2.val = v;
 						_obj2.errorMsg = _compare_msg;
 						var p = $(el).parents(".vd-box");
-						$(p).addClass("vd-error vd-compare ");
+						$(p).addClass("vd-error");
 						
+						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
 						$(p).find(".vd-compare").addClass("vd-error").text(_compare_msg);
 						$(p).removeClass("vd-ok");
 						$(el).addClass("vd-error");
@@ -356,14 +359,16 @@ var vd = (function($) {
 						_obj2.errorMsg = _remote_msg;
 						_obj2.bl = false;
 						_obj2.val = v;
+						_obj2.remote_bl=_obj2.bl;
 
 						var p = $(el).parents(".vd-box");
-						$(p).addClass("vd-error vd-remote");
-						$(p).find(".vd-req").removeClass("vd-error");
+						$(p).addClass("vd-error ");
+						
+						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
 						$(p).find(".vd-remote").addClass("vd-error").text(_remote_msg);
 						$(el).addClass("vd-error");
 						$(p).removeClass("vd-ok");
-						$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮
+						$(".vd-dep-btn", p).removeClass("vd-ok").addClass("vd-error"); //依赖按钮
 						return;
 					}
 
@@ -398,6 +403,15 @@ var vd = (function($) {
 
 						});
 
+					}else{
+						
+						if(_obj2.remote_bl){
+							$remote.remoteFunOk(_obj2, el);
+							$remote.addVdBtnStyle(el);
+						}else{
+							$remote.remoteFunError(_obj2, el, _remote_msg);
+							$remote.addVdBtnStyle(el);	
+						}
 					}
 
 				}
@@ -409,7 +423,7 @@ var vd = (function($) {
 						_obj2.val = _ck_true !== null ? _ck_true : 0;
 						_obj2.bl = true;
 						var p = $(el).parents(".vd-box");
-						$(p).removeClass("vd-error vd-ck ");
+						$(p).removeClass("vd-error  ");
 						$(el).removeClass("vd-error");
 						$(p).addClass("vd-ok");
 						$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
@@ -521,14 +535,15 @@ var vd = (function($) {
 				_obj2.errorMsg = "";
 				_obj2.bl = true;
 				_obj2.val = $(el).val();
+				_obj2.remote_bl=_obj2.bl;
 
 				var p = $(el).parents(".vd-box");
-				$(p).removeClass("vd-error vd-remote");
+				$(p).removeClass("vd-error ");
 				
 				$(p).find(".vd-remote").removeClass("vd-error").text("");
 				$(el).removeClass("vd-error");
 				$(p).addClass("vd-ok");
-				$(".vd-dep-btn", p).removeClass("error"); //依赖按钮
+				$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
 
 			},
 
@@ -536,15 +551,16 @@ var vd = (function($) {
 				_obj2.errorMsg = _remote_msg;
 				_obj2.bl = false;
 				_obj2.val = $(el).val();
+				_obj2.remote_bl=_obj2.bl;
 
 				var p = $(el).parents(".vd-box");
-				$(p).addClass("vd-error vd-remote");
+				$(p).addClass("vd-error ");
 				
-				$(p).find(".vd-req").removeClass("vd-error");
+				$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
 				$(p).find(".vd-remote").addClass("vd-error").text(_remote_msg);
 				$(el).addClass("vd-error");
 				$(p).removeClass("vd-ok");
-				$(".vd-dep-btn", p).addClass("error"); //依赖按钮
+				$(".vd-dep-btn", p).removeClass("vd-ok").addClass("vd-error"); //依赖按钮
 
 			},
 
