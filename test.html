@@ -33,7 +33,8 @@
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label class="a" for="">收件人:</label>
 
-						<input class="vd-item" type="text" name="a"   vd-pattern="^[a-zA-Z0-9]{1,32}[@][a-zA-Z0-9]{1,16}\.[a-zA-Z]{1,16}$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
+						<input class="vd-item" type="text" name="a" 
+							  vd-pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
 						
 						<span class=" vd-pattern"></span>
 					</li>
@@ -43,7 +44,7 @@
 						<input class="vd-item"  type="text" vd-req vd-req-msg="手机号码不能为空"
 							 vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" 
 							 	vd-remote="json/remote.json"	
-							 vd-remote-msg="验证码不对"
+							 vd-remote-msg="手机号码已存在"
 							 name="c" id="" value="1224" placeholder="输入正确手机号码" />
 						<!--依赖的按钮-->
 						<span class="vd-dep-btn   mui-btn">发送验证码</span>
