@@ -41,9 +41,10 @@
 					<li class="mui-table-view-cell mui-clearfix vd-box">
 						<label for="">手机:</label>
 
-						<input class="vd-item"  type="text" vd-req vd-req-msg="手机号码不能为空"
+						<input class="vd-item"  type="text" 
+							vd-req vd-req-msg="手机号码不能为空"
 							 vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" 
-							 	vd-remote="json/remote.json"	
+							 vd-remote="json/remote.json"	
 							 vd-remote-msg="手机号码已存在"
 							 name="c" id="" value="1224" placeholder="输入正确手机号码" />
 						<!--依赖的按钮-->
@@ -56,7 +57,8 @@
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label for="">验证码:</label>
 
-						<input  class="vd-item"  type="text" vd-req vd-req-msg="验证码不能为空" 
+						<input  class="vd-item"  type="text" 
+							vd-req vd-req-msg="验证码不能为空" 
 							vd-remote="json/remote.json"	vd-remote-length="6" 
 							 vd-remote-msg="验证码不对" name="yzm" maxlength="6" value=""
 							 
@@ -72,17 +74,20 @@
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label class="a" for="">密码:</label>
 
-						<input  class="vd-item"  type="text" name="pwd"  vd-req vd-req-msg="密码不能为空"
+						<input  class="vd-item"  type="text" 
+							name="pwd"  vd-req vd-req-msg="密码不能为空"
 							 vd-compare-emit="pwd2"  vd-pattern="^\S{8,32}$" vd-pattern-msg="密码长度8到32位"
 							 
 							  value="" placeholder="输入密码" />
  						<span class="vd-req "></span>
-						<span class="vd-pattern"> 手机格式不对</span>
+					
 					</li>
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label class="a" for="">确认密码:</label>
 
-						<input class="vd-item"  type="text" name="pwd2"  vd-req vd-req-msg="密码不能为空" 
+						<input class="vd-item"  type="text" 
+							name="pwd2" 
+							 vd-req vd-req-msg="密码不能为空" 
 							 vd-compare="pwd"  vd-compare-msg="两次密码不能相同"  value="" placeholder="输入密码" />
 							 
 							 <span class="vd-req "></span>
@@ -103,6 +108,8 @@
 						男
 						<input  class="vd-item" vd-rd type="radio" vd-rd-msg="单选不能为空"  name="rdp" value="2" />
 						女
+					 	<br/>
+					 	<span class="vd-req "></span>
 						
 					</li>
 					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
@@ -111,12 +118,15 @@
 						男
 						<input  class="vd-item" vd-rd type="radio" vd-rd-msg="单选不能为空"  name="rdp2" value="2" />
 						女
-						
+						<br/>
+					 	<span class="vd-req "></span>
 					</li>
 					<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
 						<label for="">自动登陆:</label>
-						<input class="vd-item"  type="checkbox" checked="" name="ck" id=""  vd-ck vd-ck-ok vd-ck-true="1" vd-ck-false="0" value="1" vd-ck-msg="this is checkbox" />
-					
+						<input class="vd-item"  type="checkbox"
+							 checked="" name="ck" id=""  vd-ck vd-ck-ok vd-ck-true="1" vd-ck-false="0" value="1" vd-ck-msg="this is checkbox" />
+					 	<br/>
+					 	<span class="vd-req "></span>
 					</li>
 				</ul>
 
