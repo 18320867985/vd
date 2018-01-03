@@ -190,9 +190,6 @@ var vd = (function($) {
 								_obj2.errorMsg = _rd_msg;
 							}
 						}
-						
-						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
-						$(p).find(".vd-req").addClass("vd-error").text(_obj2.errorMsg);
 						//  流程终止
 						return;
 					} else {
@@ -202,8 +199,6 @@ var vd = (function($) {
 						$(p).removeClass("vd-error vd-rd ");
 						$(el).removeClass("vd-error");
 						$(p).addClass("vd-ok");
-						
-					$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
 
 						// 选择了 流程以下走
 					}
@@ -386,7 +381,13 @@ var vd = (function($) {
 							type: "get",
 							timeout: 10000,
 							success: function(data) {
-
+								data=data||false;
+								
+								if(typeof data!=="number"){
+									var _num=Number(data);
+									data=isNaN(_num)?false:_num;
+								}
+								
 								if(!data) {
 
 									$remote.remoteFunError(_obj2, el, _remote_msg);
@@ -432,9 +433,6 @@ var vd = (function($) {
 						$(el).removeClass("vd-error");
 						$(p).addClass("vd-ok");
 						$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
-						
-						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
-												
 					
 
 					} else {
@@ -446,9 +444,7 @@ var vd = (function($) {
 						$(p).removeClass("vd-ok");
 						$(el).addClass("vd-error");
 						$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮
-						
-						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
-						$(p).find(".vd-req").addClass("vd-error").text(_ck_msg);
+							
 
 						return;
 
@@ -549,7 +545,7 @@ var vd = (function($) {
 
 				var p = $(el).parents(".vd-box");
 				$(p).removeClass("vd-error ");
-				$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
+				
 				$(p).find(".vd-remote").removeClass("vd-error").text("");
 				$(el).removeClass("vd-error");
 				$(p).addClass("vd-ok");
