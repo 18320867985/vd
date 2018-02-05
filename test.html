@@ -123,19 +123,33 @@
 					<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
 						<label for="">自动登陆:</label>
 						<input class="vd-item"  type="checkbox"
-							 checked="" name="ck" id=""  vd-ck vd-ck-ok vd-ck-true="1" vd-ck-false="0" value="1" vd-ck-msg="this is checkbox" />
+							 checked name="ck"  vd-ck  vd-ck-true="1" vd-ck-false="0"  vd-ck-msg="没有选择" />
 					 	<br/>
 					 	<span class="vd-req "></span>
 					</li>
+					
+					<li class="mui-row mui-clearfix   vd-box">
+							<div class="mui-col-xs-4">
+								<label for="iunput_5">设为默认地址</label>
+							</div>
+
+							<div class="mui-col-xs-8 check-box">
+								<div class="check-item mui-pull-right">
+									<input  class=" vd-item"  name="def" type="checkbox" id="inpu_5" vd-ck-not vd-ck  vd-ck-true="1" vd-ck-false="0"  vd-ck-msg="">
+
+								</div>
+							</div>
+
+						</li>
 				</ul>
 
-				<input class="vd-btn" type="button"    id="" value="提交" />
+				<input class="vd-btn" type="button"    id="" value="提交" data-alert='{"empt:""}' />
 			</form>
 		</section>
 	
 		
 		<!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
-	<	<script src="jq/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jq/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="vd.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script>
