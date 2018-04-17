@@ -45,7 +45,7 @@
 							 vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" 
 							 vd-remote="json/remote.json"	
 							 vd-remote-msg="手机号码已存在"
-							 name="c" id="" value="1224" placeholder="输入正确手机号码" />
+							 name="c" id="" value="134535" placeholder="输入正确手机号码" />
 						<!--依赖的按钮-->
 						<span class="vd-dep-btn   mui-btn">发送验证码</span>
 						
@@ -134,8 +134,8 @@
 							</div>
 
 							<div class="mui-col-xs-8 check-box">
-								<div class="check-item mui-pull-right">
-									<input  class=" vd-item"  name="def" type="checkbox" id="inpu_5" vd-ck-not vd-ck  vd-ck-true="1" vd-ck-false="0"  vd-ck-msg="">
+								<div class="check-item mui-pull-left">
+									<input  class=" vd-item"  name="def" type="checkbox" id="inpu_5" vd-ck vd-ck-not  vd-ck-true="1" vd-ck-false="0"  vd-ck-msg="">
 
 								</div>
 							</div>
@@ -150,7 +150,7 @@
 		
 		<!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="jq/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="vd.js" type="text/javascript" charset="utf-8"></script>
+		<script src="vd-1.0.2.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script>
 			
@@ -159,6 +159,9 @@
 			var vd1=vd.create(".form1");
 			
 			vd1.init();
+			
+			// 检查验证
+		//	vd1.check(); 
 			$(".vd-btn").on("click", function() {
 	
 					// 是否验证成功
