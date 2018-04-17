@@ -12,10 +12,11 @@ var vd = (function($) {
 		this.formName = typeof formName === "undefined" ? ".form" : formName,
 
 			this.init = function() {
-
+				
 				this.addErrorStyle(false, true);
 				this.checkObj(this.formName);
 				this.addVidation();
+				
 			},
 
 			this.disabled = function(obj) {
@@ -69,6 +70,7 @@ var vd = (function($) {
 
 					// type=checkbox 复选框
 					var _ck = $(this).attr("vd-ck");
+					var _ck_not = $(this).attr("vd-ck-not");
 					var _ck_ok = typeof $(this).attr("vd-ck-ok") !== "undefined" ? true : false;
 
 					var errorMsg = "";
@@ -93,13 +95,20 @@ var vd = (function($) {
 						obj.val = v;
 						obj.el = this; // document.forms[formName][name];
 						obj.bl = false;
+						
 						if(typeof _rd !== "undefined") {
 							obj.rd = "rd"; // type=radio 单选框标记属性
 							obj.bl = _rd_ok;
 						}
+						
 						if(typeof _ck !== "undefined") {
-
-							obj.bl = _ck_ok;
+							
+							if(typeof _ck_not !== "undefined"){
+								obj.bl = true;
+								
+							}else{
+								obj.bl = _ck_ok;
+							}
 						}
 
 						$this.arrs.push(obj);
@@ -117,14 +126,14 @@ var vd = (function($) {
 					var $this = this;
 					$(el).on("keyup", _obj, function(event) {
 						$this.checkElement(event.data, event.target, true, true);
-						$this.addVdBtnStyle(el);
+						$this.addVdBtnStyle();
 					});
 
 					var remote = el.getAttribute("vd-remote");
 					if(remote === null) {
 						$(el).on("change", _obj, function(event) {
 							$this.checkElement(event.data, event.target, true, true);
-							$this.addVdBtnStyle(el);
+							$this.addVdBtnStyle();
 						});
 					}
 
@@ -133,6 +142,7 @@ var vd = (function($) {
 			},
 
 			this.checkElement = function(_obj2, el, isRemote, isRadio) {
+
 
 				// req
 				var _req = el.getAttribute("vd-req");
@@ -439,11 +449,11 @@ var vd = (function($) {
 						}
 
 					} else {
+						
 						_obj2.bl = false;
 						_obj2.val = _ck_false !== null ? _ck_false : 0;
 						_obj2.errorMsg = _ck_msg;
 						if(_vd_not === null) {
-
 							var p = $(el).parents(".vd-box");
 							$(p).addClass("vd-error vd-ck ");
 							$(p).removeClass("vd-ok");
@@ -451,6 +461,7 @@ var vd = (function($) {
 							$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮	
 						} else {
 							_obj2.bl = true;
+							
 
 						}
 
@@ -549,7 +560,7 @@ var vd = (function($) {
 					var obj = this.arrs[i];
 					var el = obj.el;
 					this.checkElement(obj, el, isRemote, isRadio); // false 不去remote验证    isRadio不做比较
-					this.addVdBtnStyle(el); // 添加vd-btn提交按钮样式
+					this.addVdBtnStyle(); // 添加vd-btn提交按钮样式
 				}
 			},
 
@@ -615,10 +626,10 @@ var vd = (function($) {
 				return baseBl;
 			},
 
-			this.addVdBtnStyle = function(el) {
+			this.addVdBtnStyle = function() {
 
 				// 提交按钮
-				var p = $(el).parents(this.formName);
+				var p = $(this.formName);
 				var $vd_btn = $(".vd-btn", p);
 				if($vd_btn.length > 0) {
 
