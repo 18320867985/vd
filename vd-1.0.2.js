@@ -250,11 +250,6 @@ var vd = (function($) {
 
 						return;
 					} else {
-
-						if(isRemote && (!_remote)) { //远程不去比较
-							_obj2.errorMsg = "";
-							_obj2.val = v;
-							_obj2.bl = true;
 							var p = $(el).parents(".vd-box");
 							$(p).removeClass("vd-error ");
 
@@ -262,6 +257,18 @@ var vd = (function($) {
 							$(el).removeClass("vd-error");
 							$(p).addClass("vd-ok");
 							$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
+							
+						if(isRemote && (!_remote)) { //远程不去比较
+							_obj2.errorMsg = "";
+							_obj2.val = v;
+							_obj2.bl = true;
+//							var p = $(el).parents(".vd-box");
+//							$(p).removeClass("vd-error ");
+//
+//							$(p).find(".vd-req").removeClass("vd-error").text("");
+//							$(el).removeClass("vd-error");
+//							$(p).addClass("vd-ok");
+//							$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
 
 						}
 
@@ -517,6 +524,8 @@ var vd = (function($) {
 					}
 
 				}
+				
+				
 				return true;
 			},
 
