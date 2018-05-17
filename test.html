@@ -58,8 +58,11 @@
 
 						<input  class="vd-item"  type="text" 
 							vd-req vd-req-msg="验证码不能为空" 
-							vd-remote="json/remote.json"	vd-remote-length="6" 
-							 vd-remote-msg="验证码不对" name="yzm" maxlength="6" value=""
+							vd-remote="json/remote.json"
+							vd-remote-length="6" 
+							 vd-remote-msg="验证码不对" 
+							 name="yzm" 
+							 maxlength="6" value=""
 							 
 							 
 							  placeholder="输入验证码" />
@@ -79,6 +82,7 @@
 							 
 							  value="" placeholder="输入密码" />
  						<span class="vd-req "></span>
+ 						<span class="vd-pattern "></span>
 					
 					</li>
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
@@ -89,8 +93,8 @@
 							 vd-req vd-req-msg="密码不能为空" 
 							 vd-compare="pwd"  vd-compare-msg="两次密码不能相同"  value="" placeholder="输入密码" />
 							 
-							 <span class="vd-req "></span>
-						<span class="vd-compare"> </span>
+							<span class="vd-req "></span>
+							<span class="vd-compare"> </span>
 
 					</li>
 
