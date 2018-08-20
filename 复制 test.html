@@ -29,7 +29,7 @@
 
 				<ul class="mui-table-view mui-clearfix ">
 					<!--禁用加上 mui-disabled"-->
-					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
+					<!--<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label class="a" for="">收件人:</label>
 
 						<input class="vd-item" type="text" name="a" vd-pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
@@ -81,9 +81,7 @@
 
 						<span class="vd-req "></span>
 						<span class="vd-remote"></span>
-					</li>
-					
-				
+					</li>-->
 					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box ">
 						
 						<!--复选组框 name="ckgroup"  vd-ck-gp vd-req-msg="爱好不能为空" vd-req -->
@@ -117,16 +115,20 @@
 
 
 					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
-						<div class="vd-item  yyyyy"  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  >
-							<label for="">单选:</label>
-							<label><input  checked="" type="radio" name="sex" value="1" /> 男</label>
-							<label><input  type="radio" name="sex" value="2" /> 女</label>
-							
-						</div>
+						<label for="">单选:</label>
+						<input class="vd-item" checked="" vd-rd vd-rd-ok vd-rd-msg="单选不能为空" type="radio" name="rdp" value="1" /> 男
+						<input class="vd-item" vd-rd type="radio" vd-rd-msg="单选不能为空" name="rdp" value="2" /> 女
+						<br/>
 						<span class="vd-req"></span>
 
 					</li>
-				
+					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
+						<label for="">单选:</label>
+						<input class="vd-item" vd-rd vd-rd-msg="单选不能为空" type="radio" name="rdp2" value="1" /> 男
+						<input class="vd-item" vd-rd type="radio" vd-rd-msg="单选不能为空" name="rdp2" value="2" /> 女
+						<br/>
+						<span class="vd-req "></span>
+					</li>
 					<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
 						<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
 						<label for="">自动登陆:</label>

@@ -21,7 +21,7 @@
 
 /*当前的元素 ok*/
 
-.vd-box.vd-ok .vd-item {
+.vd-box.vd-ok input.vd-item {
 	color: green;
 	border: 1px solid green;
 }
@@ -45,7 +45,7 @@
 
 /*当前的元素error*/
 
-.vd-box.vd-error .vd-item.vd-error {
+.vd-box.vd-error input.vd-item.vd-error {
 	color: red;
 	border: 1px solid red;
 }

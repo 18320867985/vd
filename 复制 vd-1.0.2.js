@@ -65,6 +65,10 @@ window.vd = (function($) {
 					var pattern = $(this).attr("vd-pattern");
 					var pattern_msg = $(this).attr("vd-pattern-msg");
 
+					// type=radio 单选框
+					var _rd = $(this).attr("vd-rd");
+					var _rd_ok = typeof $(this).attr("vd-rd-ok") !== "undefined" ? true : false;
+
 					// type=checkbox 复选框
 					var _ck = $(this).attr("vd-ck");
 					var _ck_not = $(this).attr("vd-req");
@@ -114,10 +118,12 @@ window.vd = (function($) {
 					
 					
 				// 复选组框
+			
 				var _ck_gp_attr =$(this).attr("vd-ck-gp");
 				var _vd_gp_req = $(this).attr("vd-req"); //  必填项
-				var _ck_gp_msg = $(this).attr("vd-req-msg"); 
+				var _ck_gp_msg = $(this).attr("vd-gp-msg"); 
 				if(typeof _ck_gp_attr !== "undefined") {
+					
 					
 						var _ck_gp_length =$(this).find("[type=checkbox]:checked").length;
 					
@@ -153,37 +159,6 @@ window.vd = (function($) {
 					
 						}
 				}
-					
-				// 单选组框
-				var _rd_gp_attr =$(this).attr("vd-rd-gp");
-				var _rd_gp_req = $(this).attr("vd-req"); //  必填项
-				var _rd_gp_msg = $(this).attr("vd-req-msg"); 
-				
-				if(typeof _rd_gp_attr !== "undefined") {
-					
-						var _rd_gp_length =$(this).find("[type=radio]:checked").length;
-						var p = $(this).parents(".vd-box");
-						// 没有选择
-						if(_rd_gp_length <= 0 && typeof _rd_gp_req !== "undefined") {
-
-							obj.bl = false;
-							obj.val ="";
-							obj.errorMsg = _rd_gp_msg;
-							
-						} else {
-
-							obj.val ="";
-							$(this).find("[type=radio]:checked").each(function() {
-								var _ck_gp_true=this.getAttribute("vd-ck-true")||"";
-								var v=_ck_gp_true||this.value ||"";								
-								obj.val=v;
-							});
-							obj.bl = true;
-							obj.errorMsg = "";
-						
-						}
-				}
-						
 					
 					
 				});
@@ -233,6 +208,10 @@ window.vd = (function($) {
 				var _compare_msg = el.getAttribute("vd-compare-msg");
 				var _compare_emit = el.getAttribute("vd-compare-emit"); // 触发目标对象
 
+				// type=radio 单选框
+				var _rd = el.getAttribute("vd-rd");
+				var _rd_ok = el.getAttribute("vd-ck-ok") ? true : false;
+				var _rd_msg = el.getAttribute("vd-rd-msg");
 
 				// 复选框
 				var _ck = el.getAttribute("vd-ck");
@@ -245,20 +224,74 @@ window.vd = (function($) {
 				// 复选组框
 				var _ck_parent = $(el).closest(".vd-item");
 				var _ck_gp_attr = _ck_parent.attr("vd-ck-gp");
-				
-				// 单选组框
-				var _rd_parent = $(el).closest(".vd-item");
-				var _rd_gp_attr = _rd_parent.attr("vd-rd-gp");
+
+
 
 				// 当前的值
 				var v = $.trim(el.value);
 				
-		
-				// 非空验证
-				if(_req !== null) {
-					if(typeof _ck_gp_attr!=="undefined" ||typeof _rd_gp_attr!=="undefined"){
+				// 单选
+				if(_rd !== null) {
+					var _rd_name = $(el).attr("name");
+					var _re_length = $("" + _obj2.pName + "  [name=" + _rd_name + "]:checked").length;
+
+					// 没有选择
+					if(_re_length <= 0) {
+
+						var p = $(el).parents(".vd-box");
+						$(p).addClass("vd-error vd-rd ");
+						$(p).removeClass("vd-ok");
+						$(el).addClass("vd-error");
+
+						// 遍历选择项 设为false
+						for(var i = 0; i < this.arrs.length; i++) {
+							if($.trim(this.arrs[i].elName) === $.trim(_obj2.elName)) {
+								this.arrs[i].rd_req = false; // radio组是否为空  false为空
+								_obj2.bl = false;
+								_obj2.val = v;
+								_obj2.errorMsg = _rd_msg;
+							}
+						}
+
+						$(p).find(".vd-req").removeClass("vd-ok").addClass("vd-error").text(_rd_msg);
+						//$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮
+						//  流程终止
 						return;
+					} else {
+
+						_obj2.val = v;
+						var p = $(el).parents(".vd-box");
+						$(p).removeClass("vd-error vd-rd ");
+						$(el).removeClass("vd-error");
+						$(p).addClass("vd-ok");
+						$(p).find(".vd-req").removeClass("vd-error").addClass("vd-ok");
+						//$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
+
+						// 选择了 流程以下走
 					}
+
+					// false 点击提交不触发
+					if(isRadio) {
+
+						// 遍历选择项 设为false
+						for(var i = 0; i < this.arrs.length; i++) {
+							if($.trim(this.arrs[i].elName) === $.trim(_obj2.elName)) {
+								this.arrs[i].bl = false;
+								this.arrs[i].rd_req = true; // radio组是否为空 true不为空
+							}
+						}
+
+						// 当前项设置为true
+						_obj2.bl = true;
+						//_obj2.val=v;
+						_obj2.errorMsg = "";
+					}
+
+					return;
+				}
+
+				// 非空验证
+				if(_req !== null&& typeof _ck_gp_attr==="undefined") {
 					if(v === "") {
 						_obj2.bl = false;
 						_obj2.val = v;
@@ -287,6 +320,8 @@ window.vd = (function($) {
 							_obj2.errorMsg = "";
 							_obj2.val = v;
 							_obj2.bl = true;
+						
+
 						}
 
 					}
@@ -545,54 +580,7 @@ window.vd = (function($) {
 
 					}
 					
-				}
-
-				// 单选组框
-				var _rd_gp = _rd_parent.attr("vd-rd-gp");
-				var _rd_gp_true =  _rd_parent.attr("vd-ck-true");
-				var _rd_gp_req =  _rd_parent.attr("vd-req");
-				var _rd_gp_msg =  _rd_parent.attr("vd-req-msg");
-				console.log(_rd_parent)
-				if( typeof _rd_gp !=="undefined") {
-					
-					var _rd_name =_rd_parent.attr("name");
-					var _rd_gp_length = _rd_parent.find("[type=radio]:checked").length;
-					var p =$(el).parents(".vd-box");
-					
-						// 没有选择
-						if(_rd_gp_length <= 0 && typeof _rd_gp_req !== null) {
-
-							p.removeClass("vd-ok");
-							p.addClass("vd-error");
-
-							_obj2.bl = false;
-							_obj2.val = "";
-							
-							_obj2.errorMsg = _rd_gp_msg;
-						
-							$(p).find(".vd-req").removeClass("vd-ok").addClass("vd-error").text(_rd_gp_msg);
-						
-						
-						} else {
-
-							_obj2.val ="";
-							_rd_parent.find("[type=radio]:checked").each(function() {
-								var _ck_gp_true=this.getAttribute("vd-ck-true")||"";
-								var v=_ck_gp_true||this.value ||"";								
-								_obj2.val=v;
-
-							});
-							_obj2.bl = true;
-							_obj2.errorMsg = "";
-							p.removeClass("vd-error");
-							p.addClass("vd-ok");
-
-							$(p).find(".vd-req").removeClass("vd-error").addClass("vd-ok");
-					
-						}
-
-
-					
+				
 				}
 
 				
@@ -601,7 +589,7 @@ window.vd = (function($) {
 			this.isSuccess = function(successFun, errorFun) {
 
 				// 添加错误样式
-			//	this.addErrorStyle(false, false);
+				this.addErrorStyle(false, false);
 
 				// 是否全部验证成功
 				var baseBl = true;
@@ -609,6 +597,20 @@ window.vd = (function($) {
 				for(var i = 0; i < this.arrs.length; i++) {
 					var _obj = this.arrs[i];
 
+					// 单选按钮
+					if(_obj.rd) {
+
+						if(_obj.rd_req === false) {
+							if(typeof errorFun === "function") {
+								errorFun(_obj);
+							}
+
+							return baseBl = false;
+						}
+
+					}
+					// 非单选按钮
+					else {
 
 						if(_obj.bl === false) {
 
@@ -617,7 +619,7 @@ window.vd = (function($) {
 							}
 							return baseBl = false;
 						}
-				
+					}
 
 				}
 
@@ -716,8 +718,21 @@ window.vd = (function($) {
 				for(var i = 0; i < this.arrs.length; i++) {
 					var _obj = this.arrs[i];
 
-					if(_obj.bl === false) {
-						return baseBl = false;
+					// 单选按钮
+					if(_obj.rd) {
+
+						if(_obj.rd_req === false) {
+							return baseBl = false;
+						}
+
+					}
+
+					// 非单选按钮
+					else {
+
+						if(_obj.bl === false) {
+							return baseBl = false;
+						}
 					}
 
 				}
