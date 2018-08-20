@@ -32,14 +32,14 @@
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
 						<label class="a" for="">收件人:</label>
 
-						<input class="vd-item" type="text" name="a" vd-pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
+						<input class="vd-item" type="text" name="email" vd-pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
 
 						<span class=" vd-pattern"></span>
 					</li>
 					<li class="mui-table-view-cell mui-clearfix vd-box">
 						<label for="">手机:</label>
 
-						<input class="vd-item" type="text" vd-req vd-req-msg="手机号码不能为空" vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" vd-remote="json/remote.json" vd-remote-msg="手机号码已存在" name="c" id="" value="134535" placeholder="输入正确手机号码" />
+						<input class="vd-item" type="text" vd-req vd-req-msg="手机号码不能为空" vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" vd-remote="json/remote.json" vd-remote-msg="手机号码已存在" name="c" id="" value="" placeholder="输入正确手机号码" />
 
 						<span class="vd-dep-btn   mui-btn">发送验证码</span>
 
@@ -117,9 +117,10 @@
 
 
 					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
-						<div class="vd-item  yyyyy"  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  >
+						<!--单选组框  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  -->
+						<div class="vd-item  "  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  >
 							<label for="">单选:</label>
-							<label><input  checked="" type="radio" name="sex" value="1" /> 男</label>
+							<label><input  type="radio" name="sex" value="1" /> 男</label>
 							<label><input  type="radio" name="sex" value="2" /> 女</label>
 							
 						</div>
@@ -130,7 +131,7 @@
 					<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
 						<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
 						<label for="">自动登陆:</label>
-						<input class="vd-item" type="checkbox" name="ck" vd-ck vd-ck-true="1" vd-ck-false="0" vd-ck-ok vd-ck-msg="没有选择自动登陆" />
+						<input class="vd-item" type="checkbox" name="ck"  vd-ck vd-ck-true="1" vd-ck-false="0"   />
 						<br/>
 						<span class="vd-req "></span>
 					</li>
@@ -142,7 +143,7 @@
 
 						<div class="mui-col-xs-8 check-box">
 							<div class="check-item mui-pull-left">
-								<input class=" vd-item" name="def" type="checkbox" id="inpu_5" vd-ck vd-req vd-ck-true="1" vd-ck-false="0" vd-ck-msg="没有同意协议">
+								<input class=" vd-item" name="def" type="checkbox" id="inpu_5" vd-ck  vd-ck-true="1" vd-ck-false="0" vd-req vd-req-msg="没有同意协议">
 						
 							</div>
 							

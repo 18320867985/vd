@@ -48,8 +48,6 @@ window.vd = (function($) {
 
 			},
 
-			this.oldRemoteValue = "",
-
 			this.checkObj = function(formName) {
 				if(typeof formName === "undefined") {
 					formName = ".form";
@@ -67,8 +65,8 @@ window.vd = (function($) {
 
 					// type=checkbox 复选框
 					var _ck = $(this).attr("vd-ck");
-					var _ck_not = $(this).attr("vd-req");
-					var _ck_ok = typeof $(this).attr("vd-ck-ok") !== "undefined" ? true : false;
+					var _ck_req = $(this).attr("vd-req");
+					var _ck_checked = $(this).attr("vd-ck-true") || $(this).val();
 
 					var errorMsg = "";
 					if(typeof req_msg !== "undefined" && v === "") {
@@ -92,35 +90,41 @@ window.vd = (function($) {
 						obj.val = v;
 						obj.el = this; // document.forms[formName][name];
 						obj.bl = false;
-
-						if(typeof _rd !== "undefined") {
-							obj.rd = "rd"; // type=radio 单选框标记属性
-							obj.bl = _rd_ok;
+						if( typeof _ck_req==="undefined"){
+							obj.bl=true;
 						}
 
 						if(typeof _ck !== "undefined") {
 
-							if(typeof _ck_not !== "undefined") {
+							if(this.checked) {
 								obj.bl = true;
+								obj.val = _ck_checked;
 
 							} else {
-								obj.bl = _ck_ok;
+
+								if(typeof _ck_req !== "undefined") {
+									obj.bl = false;
+								} else {
+									obj.bl = true;
+								}
+
+								obj.val = $(this).attr("vd-ck-false") || false;
 							}
+
 						}
 
 						$this.arrs.push(obj);
 
 					}
-					
-					
-				// 复选组框
-				var _ck_gp_attr =$(this).attr("vd-ck-gp");
-				var _vd_gp_req = $(this).attr("vd-req"); //  必填项
-				var _ck_gp_msg = $(this).attr("vd-req-msg"); 
-				if(typeof _ck_gp_attr !== "undefined") {
-					
-						var _ck_gp_length =$(this).find("[type=checkbox]:checked").length;
-					
+
+					// 复选组框
+					var _ck_gp_attr = $(this).attr("vd-ck-gp");
+					var _vd_gp_req = $(this).attr("vd-req"); //  必填项
+					var _ck_gp_msg = $(this).attr("vd-req-msg");
+					if(typeof _ck_gp_attr !== "undefined") {
+
+						var _ck_gp_length = $(this).find("[type=checkbox]:checked").length;
+
 						var p = $(this).parents(".vd-box");
 						// 没有选择
 						if(_ck_gp_length <= 0 && typeof _vd_gp_req !== "undefined") {
@@ -132,15 +136,14 @@ window.vd = (function($) {
 							obj.val = [];
 							obj.errorMsg = _ck_gp_msg;
 							//$(p).find(".vd-req").removeClass("vd-ok").addClass("vd-error").text(_ck_gp_msg);
-						
-						
+
 						} else {
 
 							obj.val = [];
-							
+
 							$(this).find("[type=checkbox]:checked").each(function() {
-								var _ck_gp_true=this.getAttribute("vd-ck-true")||"";
-								var v=_ck_gp_true||this.value ||"";								
+								var _ck_gp_true = this.getAttribute("vd-ck-true") || "";
+								var v = _ck_gp_true || this.value || "";
 								obj.val.push(v);
 
 							});
@@ -150,42 +153,40 @@ window.vd = (function($) {
 							//p.addClass("vd-ok");
 
 							//$(p).find(".vd-req").removeClass("vd-error").addClass("vd-ok");
-					
+
 						}
-				}
-					
-				// 单选组框
-				var _rd_gp_attr =$(this).attr("vd-rd-gp");
-				var _rd_gp_req = $(this).attr("vd-req"); //  必填项
-				var _rd_gp_msg = $(this).attr("vd-req-msg"); 
-				
-				if(typeof _rd_gp_attr !== "undefined") {
-					
-						var _rd_gp_length =$(this).find("[type=radio]:checked").length;
+					}
+
+					// 单选组框
+					var _rd_gp_attr = $(this).attr("vd-rd-gp");
+					var _rd_gp_req = $(this).attr("vd-req"); //  必填项
+					var _rd_gp_msg = $(this).attr("vd-req-msg");
+
+					if(typeof _rd_gp_attr !== "undefined") {
+
+						var _rd_gp_length = $(this).find("[type=radio]:checked").length;
 						var p = $(this).parents(".vd-box");
 						// 没有选择
 						if(_rd_gp_length <= 0 && typeof _rd_gp_req !== "undefined") {
 
 							obj.bl = false;
-							obj.val ="";
+							obj.val = "";
 							obj.errorMsg = _rd_gp_msg;
-							
+
 						} else {
 
-							obj.val ="";
+							obj.val = "";
 							$(this).find("[type=radio]:checked").each(function() {
-								var _ck_gp_true=this.getAttribute("vd-ck-true")||"";
-								var v=_ck_gp_true||this.value ||"";								
-								obj.val=v;
+								var _ck_gp_true = this.getAttribute("vd-ck-true") || "";
+								var v = _ck_gp_true || this.value || "";
+								obj.val = v;
 							});
 							obj.bl = true;
 							obj.errorMsg = "";
-						
+
 						}
-				}
-						
-					
-					
+					}
+
 				});
 
 			},
@@ -233,63 +234,63 @@ window.vd = (function($) {
 				var _compare_msg = el.getAttribute("vd-compare-msg");
 				var _compare_emit = el.getAttribute("vd-compare-emit"); // 触发目标对象
 
-
 				// 复选框
 				var _ck = el.getAttribute("vd-ck");
 				var _ck_value = el.getAttribute("value") || ""; // 选中的值
 				var _ck_true = el.getAttribute("vd-ck-true"); // 选中的值
 				var _ck_false = el.getAttribute("vd-ck-false"); // 没选中的值
-				var _ck_msg = el.getAttribute("vd-ck-msg");
+				var _ck_msg = el.getAttribute("vd-req-msg");
 				var _vd_req = el.getAttribute("vd-req"); //  必填项
-				
+
 				// 复选组框
 				var _ck_parent = $(el).closest(".vd-item");
 				var _ck_gp_attr = _ck_parent.attr("vd-ck-gp");
-				
+
 				// 单选组框
 				var _rd_parent = $(el).closest(".vd-item");
 				var _rd_gp_attr = _rd_parent.attr("vd-rd-gp");
 
 				// 当前的值
 				var v = $.trim(el.value);
-				
-		
+
 				// 非空验证
 				if(_req !== null) {
-					if(typeof _ck_gp_attr!=="undefined" ||typeof _rd_gp_attr!=="undefined"){
-						return;
-					}
-					if(v === "") {
-						_obj2.bl = false;
-						_obj2.val = v;
-						_obj2.errorMsg = _req_msg;
-						var p = $(el).parents(".vd-box");
-						$(p).removeClass("vd-pattern vd-remote vd-compare").addClass("vd-error  ");
+					if(!(typeof _ck_gp_attr !== "undefined" || typeof _rd_gp_attr !== "undefined")) {
 
-						$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
-						$(p).find(".vd-req").addClass("vd-error").text(_req_msg);
-						$(el).addClass("vd-error");
-						$(p).removeClass("vd-ok ");
-
-						$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮
-
-						return;
-					} else {
-						var p = $(el).parents(".vd-box");
-						$(p).removeClass("vd-error ");
-
-						$(p).find(".vd-req").removeClass("vd-error").text("");
-						$(el).removeClass("vd-error");
-						$(p).addClass("vd-ok");
-						$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
-
-						if(isRemote && (!_remote)) { //远程不去比较
-							_obj2.errorMsg = "";
+						if(v === "") {
+							_obj2.bl = false;
 							_obj2.val = v;
-							_obj2.bl = true;
+							_obj2.errorMsg = _req_msg;
+							var p = $(el).parents(".vd-box");
+							$(p).removeClass("vd-pattern vd-remote vd-compare").addClass("vd-error  ");
+
+							$(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
+							$(p).find(".vd-req").addClass("vd-error").text(_req_msg);
+							$(el).addClass("vd-error");
+							$(p).removeClass("vd-ok ");
+
+							$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮
+
+							return;
+						} else {
+							var p = $(el).parents(".vd-box");
+							$(p).removeClass("vd-error ");
+
+							$(p).find(".vd-req").removeClass("vd-error").text("");
+							$(el).removeClass("vd-error");
+							$(p).addClass("vd-ok");
+							$(".vd-dep-btn", p).removeClass("vd-error").addClass("vd-ok"); //依赖按钮
+
+							if(isRemote && (!_remote)) { //远程不去比较
+								_obj2.errorMsg = "";
+								_obj2.val = v;
+								_obj2.bl = true;
+							}
+
 						}
 
 					}
+
 				}
 
 				// 触发比较对象
@@ -470,10 +471,9 @@ window.vd = (function($) {
 
 					} else {
 
-						_obj2.bl = false;
 						_obj2.val = _ck_false !== null ? _ck_false : 0;
 						_obj2.errorMsg = _ck_msg;
-						if(_vd_req != null) {
+						if(_vd_req !== null) {
 							var p = $(el).parents(".vd-box");
 							$(p).addClass("vd-error vd-ck ");
 							$(p).removeClass("vd-ok");
@@ -481,7 +481,7 @@ window.vd = (function($) {
 
 							_obj2.bl = false;
 							$(p).find(".vd-req").removeClass("vd-ok").addClass("vd-error").text(_ck_msg);
-						//	$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮	
+							//	$(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮	
 
 						} else {
 							_obj2.bl = true;
@@ -495,19 +495,18 @@ window.vd = (function($) {
 					}
 
 				}
-				
-				
+
 				// 复选组框
 				if(typeof _ck_gp_attr !== "undefined") {
 
 					var _ck_gp = _ck_parent.attr("vd-ck-gp");
 					var _ck_gp_msg = _ck_parent.attr("vd-req-msg");
 					var _vd_gp_req = _ck_parent.attr("vd-req"); //  必填项
-					
+
 					if(typeof _ck_gp !== "undefined") {
 
 						var _ck_gp_length = _ck_parent.find("[type=checkbox]:checked").length;
-					
+
 						var p = _ck_parent.parents(".vd-box");
 						// 没有选择
 						if(_ck_gp_length <= 0 && typeof _vd_gp_req !== "undefined") {
@@ -519,18 +518,16 @@ window.vd = (function($) {
 							_obj2.val = [];
 							v = "";
 							_obj2.errorMsg = _ck_gp_msg;
-						
 
 							$(p).find(".vd-req").removeClass("vd-ok").addClass("vd-error").text(_ck_gp_msg);
-						
-						
+
 						} else {
 
 							_obj2.val = [];
 							v = [];
 							_ck_parent.find("[type=checkbox]:checked").each(function() {
-								var _ck_gp_true=this.getAttribute("vd-ck-true")||"";
-								var v=_ck_gp_true||this.value ||"";								
+								var _ck_gp_true = this.getAttribute("vd-ck-true") || "";
+								var v = _ck_gp_true || this.value || "";
 								_obj2.val.push(v);
 
 							});
@@ -540,68 +537,63 @@ window.vd = (function($) {
 							p.addClass("vd-ok");
 
 							$(p).find(".vd-req").removeClass("vd-error").addClass("vd-ok");
-					
+
 						}
 
 					}
-					
+
 				}
 
 				// 单选组框
 				var _rd_gp = _rd_parent.attr("vd-rd-gp");
-				var _rd_gp_true =  _rd_parent.attr("vd-ck-true");
-				var _rd_gp_req =  _rd_parent.attr("vd-req");
-				var _rd_gp_msg =  _rd_parent.attr("vd-req-msg");
-				console.log(_rd_parent)
-				if( typeof _rd_gp !=="undefined") {
-					
-					var _rd_name =_rd_parent.attr("name");
+				var _rd_gp_true = _rd_parent.attr("vd-ck-true");
+				var _rd_gp_req = _rd_parent.attr("vd-req");
+				var _rd_gp_msg = _rd_parent.attr("vd-req-msg");
+				if(typeof _rd_gp !== "undefined") {
+
+					var _rd_name = _rd_parent.attr("name");
 					var _rd_gp_length = _rd_parent.find("[type=radio]:checked").length;
-					var p =$(el).parents(".vd-box");
-					
-						// 没有选择
-						if(_rd_gp_length <= 0 && typeof _rd_gp_req !== null) {
+					var p = $(el).parents(".vd-box");
 
-							p.removeClass("vd-ok");
-							p.addClass("vd-error");
+					// 没有选择
+					if(_rd_gp_length <= 0 && typeof _rd_gp_req !== null) {
 
-							_obj2.bl = false;
-							_obj2.val = "";
-							
-							_obj2.errorMsg = _rd_gp_msg;
-						
-							$(p).find(".vd-req").removeClass("vd-ok").addClass("vd-error").text(_rd_gp_msg);
-						
-						
-						} else {
+						p.removeClass("vd-ok");
+						p.addClass("vd-error");
 
-							_obj2.val ="";
-							_rd_parent.find("[type=radio]:checked").each(function() {
-								var _ck_gp_true=this.getAttribute("vd-ck-true")||"";
-								var v=_ck_gp_true||this.value ||"";								
-								_obj2.val=v;
+						_obj2.bl = false;
+						_obj2.val = "";
 
-							});
-							_obj2.bl = true;
-							_obj2.errorMsg = "";
-							p.removeClass("vd-error");
-							p.addClass("vd-ok");
+						_obj2.errorMsg = _rd_gp_msg;
 
-							$(p).find(".vd-req").removeClass("vd-error").addClass("vd-ok");
-					
-						}
+						$(p).find(".vd-req").removeClass("vd-ok").addClass("vd-error").text(_rd_gp_msg);
 
+					} else {
 
-					
+						_obj2.val = "";
+						_rd_parent.find("[type=radio]:checked").each(function() {
+							var _ck_gp_true = this.getAttribute("vd-ck-true") || "";
+							var v = _ck_gp_true || this.value || "";
+							_obj2.val = v;
+
+						});
+						_obj2.bl = true;
+						_obj2.errorMsg = "";
+						p.removeClass("vd-error");
+						p.addClass("vd-ok");
+
+						$(p).find(".vd-req").removeClass("vd-error").addClass("vd-ok");
+
+					}
+
 				}
 
-				
 			},
 
 			this.isSuccess = function(successFun, errorFun) {
 
 				// 添加错误样式
-			//	this.addErrorStyle(false, false);
+				this.addErrorStyle(false, false);
 
 				// 是否全部验证成功
 				var baseBl = true;
@@ -609,15 +601,13 @@ window.vd = (function($) {
 				for(var i = 0; i < this.arrs.length; i++) {
 					var _obj = this.arrs[i];
 
+					if(_obj.bl === false) {
 
-						if(_obj.bl === false) {
-
-							if(typeof errorFun === "function") {
-								errorFun(_obj);
-							}
-							return baseBl = false;
+						if(typeof errorFun === "function") {
+							errorFun(_obj);
 						}
-				
+						return baseBl = false;
+					}
 
 				}
 

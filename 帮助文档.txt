@@ -1,52 +1,55 @@
 
-	// 1.初始化表单验证对象
-	var vd1=vd.create(".form1");  // 表单的 class的名称
-	vd1.init();
-	                  
-	// 检查验证=>vd1.check(); 	
+	 1.初始化表单验证对象
+		var vd1=vd.create(".form1");  // 表单的 class的名称
+		vd1.init();
+		 检查验证=>vd1.check(); 	
 		
-	/* 2. 验证每组 添加class="vd-box" 的大框
-	  每一个item 添加class="vd-item" 和name 属性作为提交数据对象的属性
-	  例如name=age，name=sex 对象属性为{age：12,sex:女 }
+		
+	2. 验证每项的父级 大框添加class="vd-box" 的class
+	  	每一个项添加class="vd-item" 和  name 属性作为提交数据对象的属性
+	  	例如name=age，name=sex 对象属性为{age：12,sex:女 }
 	  
-	*/
 	
-	
-	/* 3
-	 * 验证类型
+
+	3 . 验证类型
 	 
-	 1.非空验证 => 验证属性： vd-req  
-	  验证错误提示信息：vd-req-msg="此字段不能为空"
+	 a.非空验证 => 验证属性： vd-req  
+		  验证错误提示信息：vd-req-msg="此字段不能为空"
 	 
-	 2.正则验证 => 验证属性： vd-pattern="^1\d{10}$" 
-	   验证错误提示信息：vd-pattern-msg="此字段格式不对"
+	 b.正则验证 => 验证属性： vd-pattern="^1\d{10}$" 
+	   	验证错误提示信息：vd-pattern-msg="此字段格式不对"
 	 
-	 3.ajax远程验证 => 验证属性： vd-remote="json/remote.json"
-	  长度达到才验证：vd-remote-length="6"  
-	  验证错误提示信息： vd-remote-msg="验证码不对"
+	 c.ajax远程验证 => 验证属性： vd-remote="json/remote.json"
+	  	长度达到才验证：vd-remote-length="6"  
+	 	 验证错误提示信息： vd-remote-msg="验证码不对"
 	 
-	 4.比较验证=>  验证属性：  vd-compare="pwd" 
-	 pwd是比较的name="pwd"的字段名称 
-	    验证错误提示信息：vd-compare-msg="两次密码不能相同"
-	 vd-compare-emit="pwd2"  是比较的字段name="pwd"元素上触发的字段
+	 d.比较验证=>  验证属性：  vd-compare="pwd" 
+	 	pwd是比较的name="pwd"的字段名称 
+	   	 验证错误提示信息：vd-compare-msg="两次密码不能相同"
+	 	vd-compare-emit="pwd2"  是比较的字段name="pwd"元素上触发的字段
 	 	
-	 5.单选按钮=>  验证属性： vd-rd  
-	  选中的为:vd-rd-ok  
-	   验证错误提示信息： vd-rd-msg="单选不能为空"
-	 [name="gp"为同一组 ]	
-	 radiobox默认每一项为必填的
+	 	
+	4 .单选组=>  验证属性： vd-rd-gp  
+	 	name="gp"=> 为提交数据的对象属性值 
+		vd-req=> 为必填 
+		vd-req-msg="单选不能为空"为=> 验证非空提示信息
 	 
-	 
-	 6.checkbox验证=> 验证属性:vd-ck   选中的为:vd-ck-ok  选中的值：vd-ck-true="1"
-	   没选中的值vd-ck-false="0" 
-	   验证错误提示信息：vd-ck-msg="没有同意协议" 
-	 属性设为 vd-req =>为必填
-	 
-	 
-	 */
+
+	5 .checkbox验证=> 验证属性:vd-ck    
+		 选中的值：vd-ck-true="1"
+	   	没选中的值vd-ck-false="0" 
+	   	 属性设为 vd-req =>为必填
+	   	验证错误提示信息：vd-req-msg="没有同意协议" 
 	
-	
-	4.提交触发
+	 
+	 
+	 6.复选组框=>  验证属性： vd-ck-gp  
+	 	name="gp"=> 为提交数据的对象属性值 
+		vd-req=> 为必填 
+		vd-req-msg="单选不能为空"为=> 验证非空提示信息
+	 
+	 
+	7.提交触发
 	$(".vd-btn").on("click", function() {
 	
 					// 是否验证成功
