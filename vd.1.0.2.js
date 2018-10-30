@@ -4,11 +4,11 @@
    描述：表单验证    
  version:1.0.0
 */
+window._vd=vd;
+var  vd = (function() {
 
-var _vd = window.vd;
-window.vd = (function($) {
 	
-	var Obj = function(formName) {
+		var Obj = function(formName) {
 	
 			this.formName = typeof formName === "undefined" ? ".form" : formName,
 	
@@ -57,7 +57,6 @@ window.vd = (function($) {
 					$this = this;
 	
 					$("" + formName + " .vd-item").each(function() {
-						
 						var name = $(this).attr("name");
 						var v = $(this).val();
 						var req_msg = $(this).attr("vd-req-msg");
@@ -739,6 +738,16 @@ window.vd = (function($) {
 					$(".vd-item",p).val("");
 					$(".vd-box",p).removeClass("vd-error vd-ok");
 					$(".vd-btn",p).removeClass("vd-error vd-ok");
+					
+					//error
+					$(".vd-req",p).removeClass("vd-error");
+					$(".vd-pattern",p).removeClass("vd-error");
+					$(".vd-remote",p).removeClass("vd-error");
+					$(".vd-compare",p).removeClass("vd-error");
+					$(".vd-dep-btn ",p).removeClass("vd-error");
+
+
+
 				}
 	
 		}
@@ -749,4 +758,4 @@ window.vd = (function($) {
 			}
 		};
 
-})(window.Zepto || window.jQuery || mobile);
+})();
