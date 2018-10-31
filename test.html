@@ -168,13 +168,16 @@
 			vd1.init();
 
 			// 检查验证=>vd1.check(); 
+			//vd1.isSubmit=true;  //是否第一提交  恢复为:true
+
 			
 			// 点击提交验证
 			$(".vd-btn").on("click", function() {
 
 				// 是否验证成功
 				vd1.isSuccess(function(obj) {
-					vd1.disabled($(vd1.formName).find("input")); //禁用
+					vd1.reset();
+					//vd1.disabled($(vd1.formName).find("input")); //禁用
 					//vd1.enabled($(vd1.formName).find("input")); //激活
 					$(".vd-btn").val("正在提交中...");
 					alert(JSON.stringify(obj));
