@@ -7,7 +7,7 @@
 window._vd = vd;
 var vd = (function() {
 	
-		var Obj = function(formName) {
+	var Obj = function(formName) {
 		
 				this.formName = typeof formName === "undefined" ? ".form" : formName,
 		
@@ -31,7 +31,9 @@ var vd = (function() {
 					},
 		
 					this.arrs = [],
-		
+					
+					this.vdbtnText="",
+					
 					this.compareEmit = function(pName, compareName, value) {
 						var el = $("" + pName + " [name=" + compareName + "]");
 						if($.trim(el.val()) === "") {
@@ -207,6 +209,13 @@ var vd = (function() {
 									$this.checkElement(event.data, event.target, true, true);
 									$this.addVdBtnStyle();
 								});
+							}
+							
+							var vdBtn=$(".vd-btn",this.formName);
+							if(vdBtn.length>0&&vdBtn[0].hasAttribute("value")){
+								this.vdbtnText=vdBtn.val();
+							}else{
+								this.vdbtnText=vdBtn.text();
 							}
 		
 						}
@@ -622,7 +631,7 @@ var vd = (function() {
 									this.disabled($(this.formName).find("textarea")); //禁用
 	
 									var vdBtn=$(".vd-btn",this.formName);
-									if(vdBtn[0].hasAttribute("value")){
+								if(vdBtn.length>0&&vdBtn[0].hasAttribute("value")){
 										vdBtn.val("正在提交中...");
 									}else{
 										vdBtn.text("正在提交中...");
@@ -729,12 +738,13 @@ var vd = (function() {
 		
 						return baseBl;
 					},
-		
+					
 					this.addVdBtnStyle = function() {
 		
 						// 提交按钮
 						var p = $(this.formName);
 						var $vd_btn = $(".vd-btn", p);
+					
 						if($vd_btn.length > 0) {
 		
 							if(this.vdIsOk()) {
@@ -764,12 +774,12 @@ var vd = (function() {
 						this.enabled($(this.formName).find("input")); //激活
 						this.enabled($(this.formName).find("select")); //激活
 						this.enabled($(this.formName).find("textarea")); //激活
-					var vdBtn=$(".vd-btn",this.formName);
-					if(vdBtn[0].hasAttribute("value")){
-						vdBtn.val("提交");
-					}else{
-						vdBtn.text("提交");
-					}
+						var vdBtn=$(".vd-btn",this.formName);
+					if(vdBtn.length>0&&vdBtn[0].hasAttribute("value")){
+							vdBtn.val(this.vdbtnText);
+						}else{
+							vdBtn.text(this.vdbtnText);
+						}
 					}
 		
 			}
@@ -779,5 +789,5 @@ var vd = (function() {
 					return new Obj(formName);
 				}
 			};
-			
+	
 })();

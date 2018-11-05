@@ -24,9 +24,7 @@
 
 		<!--主体内容-->
 		<section class="rwinfo mui-content">
-
 			<form name="form1" class="form1">
-
 				<ul class="mui-table-view mui-clearfix ">
 					<!--禁用加上 mui-disabled"-->
 					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
@@ -153,14 +151,14 @@
 					</li>
 			</ul>
 
-				<input class="vd-btn" type="button" id="" value="提交" data-alert='{"empt:""}' />
+				<input class="vd-btn" type="button" id="" value="保存" data-alert='{"empt:""}' />
 			
 			</form>
 		</section>
 
 		<!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="mobile-1.0.0.js" type="text/javascript" charset="utf-8"></script>
-		<script src="vd-1.0.2.js" type="text/javascript" charset="utf-8"></script>
+		<script src="vd.1.0.2.js" type="text/javascript" charset="utf-8"></script>
 
 		<script>
 			// 初始化验证对象
@@ -170,18 +168,17 @@
 			// 检查验证=>vd1.check(); 
 			//vd1.isSubmit=true;  //是否第一提交  恢复为:true
 
-			
 			// 点击提交验证
 			$(".vd-btn").on("click", function() {
 
 				// 是否验证成功
 				vd1.isSuccess(function(obj) {
-					vd1.reset();
-					//vd1.disabled($(vd1.formName).find("input")); //禁用
-					//vd1.enabled($(vd1.formName).find("input")); //激活
-					$(".vd-btn").val("正在提交中...");
-					alert(JSON.stringify(obj));
+					setTimeout(function(){
+						vd1.reset();
+						alert(JSON.stringify(obj));
 
+					},3000);
+					
 				}, function(obj) {
 
 					obj.el.focus();
@@ -200,6 +197,8 @@
 
 			});
 		</script>
+	
+	
 	</body>
 
 </html>

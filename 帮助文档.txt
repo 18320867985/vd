@@ -54,15 +54,14 @@
 	
 					// 是否验证成功
 					vd1.isSuccess(function(obj) {
-						
-						vd1.disabled(this); //禁用
-						//vd1.enabled(this); //激活
-						$(this).val("登录中...");
+						vd1.reset();
 						//alert(JSON.stringify(obj));
 					},function(obj) {
 					
 					alert(obj.errorMsg)
 					// error 
+					vd1.reset();
+
 //					mui.alert(obj.errorMsg," ","确认",function(){
 					obj.el.focus();
 //					});
