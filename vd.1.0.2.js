@@ -6,6 +6,8 @@
 */
 window._vd = vd;
 var vd = (function() {
+	 
+	"use strict"
 	
 		var Obj = function(formName) {
 	
@@ -55,7 +57,7 @@ var vd = (function() {
 				};
 	
 				this.arrs = [];
-				$this = this;
+				var $this = this;
 	
 				$("" + formName + " .vd-item").each(function() {
 					var name = $(this).attr("name");
