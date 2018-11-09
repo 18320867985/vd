@@ -116,9 +116,9 @@
 
 					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
 						<!--单选组框  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  -->
-						<div class="vd-item  "  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  >
+						<div class="vd-item "  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  >
 							<label for="">单选:</label>
-							<label><input  type="radio" name="sex" value="1" /> 男</label>
+							<label><input  type="radio" name="sex" value="1"   /> 男</label>
 							<label><input  type="radio" name="sex" value="2" /> 女</label>
 							
 						</div>
@@ -164,10 +164,11 @@
 			// 初始化验证对象
 			var vd1 = vd.create(".form1");
 			vd1.init();
+			//vd1.reset();  //重设表单并清空所以内容和检测验证
 
-			// 检查验证=>vd1.check(); 
-			//vd1.isSubmit=true;  //是否第一提交  恢复为:true
-
+			// 检查验证没有显示样式=>vd1.check()||检查验证=>vd1.check(el) 验证当前项; 
+			// 验证并显示样式=>vd1.validate(); 
+			 
 			// 点击提交验证
 			$(".vd-btn").on("click", function() {
 

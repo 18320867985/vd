@@ -1,16 +1,16 @@
 
 	 1.初始化表单验证对象
 		var vd1=vd.create(".form1");  // 表单的 class的名称
+		// 初始化验证对象
 		vd1.init();
-		 检查验证=>vd1.check(); 	
-		
+		//vd1.reset();  //重设表单并清空所以内容和检测验
+		// 检查验证没有显示样式=>vd1.check()||检查验证=>vd1.check(el) 验证当前项; 
+		// 验证并显示样式=>vd1.validate(); 
 		
 	2. 验证每项的父级 大框添加class="vd-box" 的class
-	  	每一个项添加class="vd-item" 和  name 属性作为提交数据对象的属性
-	  	例如name=age，name=sex 对象属性为{age：12,sex:女 }
+			每一个项添加class="vd-item" 和  name 属性作为提交数据对象的属性
+			例如name=age，name=sex 对象属性为{age：12,sex:女 }
 	  
-	
-
 	3 . 验证类型
 	 
 	 a.非空验证 => 验证属性： vd-req  
@@ -52,23 +52,16 @@
 	7.提交触发
 	$(".vd-btn").on("click", function() {
 	
-					// 是否验证成功
-					vd1.isSuccess(function(obj) {
+			// 是否验证成功
+			vd1.isSuccess(function(obj) {
 						vd1.reset();
 						//alert(JSON.stringify(obj));
-					},function(obj) {
-					
-					alert(obj.errorMsg)
-					// error 
+					},
+					function(obj) {
 					vd1.reset();
-
-//					mui.alert(obj.errorMsg," ","确认",function(){
 					obj.el.focus();
-//					});
-//					
-					
 					});	
-			});
+	});
 	 
 	 
 	 
