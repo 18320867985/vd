@@ -4,7 +4,7 @@
    描述：表单验证    
  version:1.0.0
 */
-window._vd = vd;
+window._vd =window.vd;
 var vd = (function() {
 	 
 	"use strict"
