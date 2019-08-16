@@ -14,193 +14,197 @@
 
 	</head>
 
-	<body class="bg-white">
-		<!--头部-->
-		<header class="rwinfo-head mui-bar mui-bar-nav bg-white ">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left text-base"></a>
-			<h1 class="mui-title">写信息</h1>
+    <body class="bg-white">
+        <!--头部-->
+        <header class="rwinfo-head mui-bar mui-bar-nav bg-white ">
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left text-base"></a>
+            <h1 class="mui-title">写信息</h1>
 
-		</header>
+        </header>
 
-		<!--主体内容-->
-		<section class="rwinfo mui-content">
-			<form name="form1" class="form1">
-				<ul class="mui-table-view mui-clearfix ">
-					<!--禁用加上 mui-disabled"-->
-					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
-						<label class="a" for="">收件人:</label>
+        <!--主体内容-->
+        <section class="rwinfo mui-content">
+            <form name="form1" class="form1">
+                <ul class="mui-table-view mui-clearfix ">
+                    <!--禁用加上 mui-disabled"-->
+                    <li class="mui-table-view-cell mui-row mui-clearfix vd-box">
+                        <label class="a" for="">收件人:</label>
 
-						<input class="vd-item" type="text" name="email" vd-pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
+                        <input class="vd-item" type="text" name="email" vd-pattern="^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$" vd-pattern-msg="收件人格式不对" value="" placeholder="74646456@qq.com" />
 
-						<span class=" vd-pattern"></span>
-					</li>
-					<li class="mui-table-view-cell mui-clearfix vd-box">
-						<label for="">手机:</label>
+                        <span class=" vd-pattern"></span>
+                    </li>
+                    <li class="mui-table-view-cell mui-clearfix vd-box">
+                        <label for="">手机:</label>
 
-						<input class="vd-item" type="text" vd-req vd-req-msg="手机号码不能为空" vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" vd-remote="json/remote.json" vd-remote-msg="手机号码已存在" name="c" id="" value="" placeholder="输入正确手机号码" />
+                        <input class="vd-item" type="text" vd-req vd-req-msg="手机号码不能为空" vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" vd-remote="json/remote.json" vd-remote-msg="手机号码已存在" name="c" id="" value="" placeholder="输入正确手机号码" />
 
-						<span class="vd-dep-btn   mui-btn">发送验证码</span>
+                        <span class="vd-dep-btn   mui-btn">发送验证码</span>
 
-						<span class="vd-req "></span>
-						<span class="vd-pattern"> </span>
-						<span class="vd-remote"> </span>
-					</li>
-					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
-						<label for="">验证码:</label>
+                        <span class="vd-req "></span>
+                        <span class="vd-pattern"> </span>
+                        <span class="vd-remote"> </span>
+                    </li>
+                    <li class="mui-table-view-cell mui-row mui-clearfix vd-box">
+                        <label for="">验证码:</label>
 
-						<input class="vd-item" type="text" vd-req vd-req-msg="验证码不能为空" vd-remote="json/remote.json" vd-remote-length="6" vd-remote-msg="验证码不对" name="yzm" maxlength="6" value="" placeholder="输入验证码" />
+                        <input class="vd-item" type="text" vd-req vd-req-msg="验证码不能为空" vd-remote="json/remote.json" vd-remote-length="6" vd-remote-msg="验证码不对" name="yzm" maxlength="6" value="" placeholder="输入验证码" />
 
-						<span class="vd-req "></span>
+                        <span class="vd-req "></span>
 
-						<span class="vd-remote"></span>
+                        <span class="vd-remote"></span>
 
-					</li>
-					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
-						<label class="a" for="">密码:</label>
+                    </li>
+                    <li class="mui-table-view-cell mui-row mui-clearfix vd-box">
+                        <label class="a" for="">密码:</label>
 
-						<input class="vd-item" type="text" name="pwd" vd-req vd-req-msg="密码不能为空" vd-compare-emit="pwd2" vd-pattern="^\S{8,32}$" vd-pattern-msg="密码长度8到32位" value="" placeholder="输入密码" />
-						<span class="vd-req "></span>
-						<span class="vd-pattern "></span>
+                        <input class="vd-item" type="text" name="pwd" vd-req vd-req-msg="密码不能为空" vd-compare-emit="pwd2" vd-pattern="^\S{8,32}$" vd-pattern-msg="密码长度8到32位" value="" placeholder="输入密码" />
+                        <span class="vd-req "></span>
+                        <span class="vd-pattern "></span>
 
-					</li>
-					<li class="mui-table-view-cell mui-row mui-clearfix vd-box">
-						<label class="a" for="">确认密码:</label>
+                    </li>
+                    <li class="mui-table-view-cell mui-row mui-clearfix vd-box">
+                        <label class="a" for="">确认密码:</label>
 
-						<input class="vd-item" type="text" name="pwd2" vd-req vd-req-msg="密码不能为空" vd-compare="pwd" vd-compare-msg="两次密码不能相同" value="" placeholder="输入密码" />
+                        <input class="vd-item" type="text" name="pwd2" vd-req vd-req-msg="密码不能为空" vd-compare="pwd" vd-compare-msg="两次密码不能相同" value="" placeholder="输入密码" />
 
-						<span class="vd-req "></span>
-						<span class="vd-compare"> </span>
+                        <span class="vd-req "></span>
+                        <span class="vd-compare"> </span>
 
-					</li>
+                    </li>
 
-					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
-						<label for="">内容:</label>
-						<textarea class="vd-item" name="cont" rows="" vd-req vd-req-msg="内容不能为空" cols="" placeholder="输入内容"></textarea>
+                    <li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
+                        <label for="">内容:</label>
+                        <textarea class="vd-item" name="cont" rows="" vd-req vd-req-msg="内容不能为空" cols="" placeholder="输入内容"></textarea>
 
-						<span class="vd-req "></span>
-						<span class="vd-remote"></span>
-					</li>
-					
-				
-					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box ">
-						
-						<!--复选组框 name="ckgroup"  vd-ck-gp vd-req-msg="爱好不能为空" vd-req -->
-						<div class="vd-item"  name="ckgroup" vd-ck-gp vd-req-msg="爱好不能为空" vd-req>
-							<label for="">爱好:</label>
-							<label>
-								<input type="checkbox"     vd-ck-true="jquery" />
-								jquery
-							</label>
-
-							<label>
-								<input type="checkbox"   vd-ck-true="css3"  value="css3" />
-								css3
-							</label>
-
-							<label>
-								<input type="checkbox"   vd-ck-true="html5"  value="html5" />
-								html5
-							</label>
-
-							<label>
-								<input type="checkbox"   vd-ck-true="c#"  value="c#" />
-								c#
-							</label>
-
-							
-						</div>
-						<span class="vd-req "></span>
-
-					</li>
+                        <span class="vd-req "></span>
+                        <span class="vd-remote"></span>
+                    </li>
 
 
-					<li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
-						<!--单选组框  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  -->
-						<div class="vd-item "  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  >
-							<label for="">单选:</label>
-							<label><input  type="radio" name="sex" value="1"   /> 男</label>
-							<label><input  type="radio" name="sex" value="2" /> 女</label>
-							
-						</div>
-						<span class="vd-req"></span>
+                    <li class="textarea-box mui-table-view-cell mui-clearfix vd-box ">
 
-					</li>
-				
-					<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
-						<li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
-						<label for="">自动登陆:</label>
-						<input class="vd-item" type="checkbox" name="ck"  vd-ck vd-ck-true="1" vd-ck-false="0"   />
-						<br/>
-						<span class="vd-req "></span>
-					</li>
+                        <!--复选组框 name="ckgroup"  vd-ck-gp vd-req-msg="爱好不能为空" vd-req -->
+                        <div class="vd-item" name="ckgroup" vd-ck-gp vd-req-msg="爱好不能为空" vd-req>
+                            <label for="">爱好:</label>
+                            <label>
+                                <input type="checkbox" vd-ck-true="jquery" />
+                                jquery
+                            </label>
 
-					<li class="mui-row mui-clearfix   vd-box">
-						<div class="mui-col-xs-4">
-							<label for="iunput_5">是否同意协议</label>
-						</div>
+                            <label>
+                                <input type="checkbox" vd-ck-true="css3" value="css3" />
+                                css3
+                            </label>
 
-						<div class="mui-col-xs-8 check-box">
-							<div class="check-item mui-pull-left">
-								<input class=" vd-item" name="def" type="checkbox" id="inpu_5" vd-ck  vd-ck-true="1" vd-ck-false="0" vd-req vd-req-msg="没有同意协议">
-						
-							</div>
-							
-						</div>
-						<span class="vd-req"></span>
+                            <label>
+                                <input type="checkbox" vd-ck-true="html5" value="html5" />
+                                html5
+                            </label>
 
-					</li>
-			</ul>
+                            <label>
+                                <input type="checkbox" vd-ck-true="c#" value="c#" />
+                                c#
+                            </label>
 
-				<input class="vd-btn" type="button" id="" value="保存" data-alert='{"empt:""}' />
-			
-			</form>
-		</section>
 
-		<!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
-		<script src="mobile.js" type="text/javascript" charset="utf-8"></script>
-		<script src="vd.1.0.2.js" type="text/javascript" charset="utf-8"></script>
+                        </div>
+                        <span class="vd-req "></span>
 
-		<script>
-			// 初始化验证对象
-			var vd1 = vd.create(".form1");
-			vd1.init();
-			//vd1.reset();  //重设表单并清空所以内容和检测验证
+                    </li>
 
-			// 检查验证没有显示样式=>vd1.check()||检查验证=>vd1.check(el) 验证当前项; 
-			// 验证并显示样式=>vd1.validate(); 
-			 
-			// 点击提交验证
-			$(".vd-btn").on("click", function() {
 
-				// 是否验证成功
-				vd1.isSuccess(function(obj) {
-					setTimeout(function(){
-						vd1.reset();
-						alert(JSON.stringify(obj));
+                    <li class="textarea-box mui-table-view-cell mui-clearfix vd-box">
+                        <!--单选组框  name="sex"  vd-rd-gp   vd-req vd-req-msg="单选组不能为空"  -->
+                        <div class="vd-item " name="sex" vd-rd-gp vd-req vd-req-msg="单选组不能为空">
+                            <label for="">单选:</label>
+                            <label><input type="radio" name="sex" value="1" /> 男</label>
+                            <label><input type="radio" name="sex" value="2" /> 女</label>
 
-					},3000);
-					
-				}, function(obj) {
+                        </div>
+                        <span class="vd-req"></span>
 
-					obj.el.focus();
-					//console.log(obj.errorMsg)
-		
-				});
-			});
+                    </li>
 
-			// 发送验证码
-			$(".vd-dep-btn ").click(function() {
+                    <li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
+                    <li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
+                        <label for="">自动登陆:</label>
+                        <input class="vd-item" type="checkbox" name="ck" vd-ck vd-ck-true="1" vd-ck-false="0" />
+                        <br />
+                        <span class="vd-req "></span>
+                    </li>
 
-				// 根据name属性获取对象
-				if(vd1.getObj("c").bl) {
+                    <li class="mui-row mui-clearfix   vd-box">
+                        <div class="mui-col-xs-4">
+                            <label for="iunput_5">是否同意协议</label>
+                        </div>
 
-					alert("已发送验证码");
-				};
+                        <div class="mui-col-xs-8 check-box">
+                            <div class="check-item mui-pull-left">
+                                <input class=" vd-item" name="def" type="checkbox" id="inpu_5" vd-ck vd-ck-true="1" vd-ck-false="0" vd-req vd-req-msg="没有同意协议">
 
-			});
-		</script>
-	
-	
-	</body>
+                            </div>
+
+                        </div>
+                        <span class="vd-req"></span>
+
+                    </li>
+                </ul>
+
+                <div style="padding:20px;">
+                    <input class="vd-btn mui-btn-block" type="button" style="" id="" value="保存" data-alert='{"empt:""}' />
+                </div>
+
+
+            </form>
+        </section>
+
+        <!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
+        <script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="mobile.js" type="text/javascript" charset="utf-8"></script>-->
+        <script src="vd-1.0.4.js" type="text/javascript" charset="utf-8"></script>
+
+        <script>
+            // 初始化验证对象
+            var vd1 = vd.create(".form1");
+            vd1.init();
+            //vd1.reset();  //重设表单并清空所以内容和检测验证
+
+            // 检查验证没有显示样式=>vd1.check()||检查验证=>vd1.check(el) 验证当前项;
+            // 验证并显示样式=>vd1.validate();
+
+            // 点击提交验证
+            $(".vd-btn").on("click", function () {
+
+                // 是否验证成功
+                vd1.isSuccess(function (obj) {
+                    setTimeout(function () {
+                        vd1.reset();
+                        alert(JSON.stringify(obj));
+
+                    }, 3000);
+
+                }, function (obj) {
+
+                    obj.el.focus();
+                    //console.log(obj.errorMsg)
+
+                });
+            });
+
+            // 发送验证码
+            $(".vd-dep-btn ").click(function () {
+
+                // 根据name属性获取对象
+                if (vd1.getObj("c").bl) {
+
+                    alert("已发送验证码");
+                };
+
+            });
+        </script>
+
+
+    </body>
 
 </html>
