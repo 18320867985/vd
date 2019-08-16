@@ -44,6 +44,8 @@
                         <span class="vd-req "></span>
                         <span class="vd-pattern"> </span>
                         <span class="vd-remote"> </span>
+
+                        <p class="loading">正在发送中...</p>
                     </li>
                     <li class="mui-table-view-cell mui-row mui-clearfix vd-box">
                         <label for="">验证码:</label>
@@ -160,8 +162,8 @@
         </section>
 
         <!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
-        <script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-        <!--<script src="mobile.js" type="text/javascript" charset="utf-8"></script>-->
+        <!--<script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>-->
+        <script src="mobile.js" type="text/javascript" charset="utf-8"></script>
         <script src="vd-1.0.4.js" type="text/javascript" charset="utf-8"></script>
 
         <script>
@@ -193,7 +195,7 @@
             });
 
             // 发送验证码
-            $(".vd-dep-btn ").click(function () {
+            $(".vd-dep-btn").click(function () {
 
                 // 根据name属性获取对象
                 if (vd1.getObj("c").bl) {
@@ -202,6 +204,20 @@
                 };
 
             });
+
+           // vd-dep-btn 验证验证之前触发
+            $(document).on("onremotebefore", function (e) {
+                console.log("onremotebefore",e.detail)
+            })
+
+            // vd-dep-btn 验证验证完成触发
+            $(document).on("onremoteafter", function (e) {
+                console.log("onremoteafter",e.detail)
+            })
+
+            
+
+
         </script>
 
 

@@ -2,7 +2,7 @@
    作者：724485868@qq.com
    时间：2017-10-08
    描述：表单验证    
-   version:1.0.0
+   version:1.0.4
 */
 window._vd =window.vd;
 var vd = (function () { 
@@ -429,7 +429,7 @@ var vd = (function () {
                 var $remote = this;
 
                 if (isRemote) {
-
+                    $(el).trigger("onremotebefore", el);
                     $.ajax({
                         url: _remote + "?rand=" + Math.random() + "&" + el.name + "=" + v,
                         type: "get",
@@ -453,10 +453,13 @@ var vd = (function () {
                                 $remote.addVdBtnStyle(el);
 
                             }
-                        },
+
+                            $(el).trigger("onremoteafter", el);
+                                
+                                },
                         error: function (data) {
                             $remote.remoteFunError(_obj2, el, _remote_msg);
-
+                            $(el).trigger("onremoteafter", el);
                             return;
                         }
 
@@ -856,7 +859,6 @@ var vd = (function () {
             this.enabled($(this.formName).find("select")); //激活
             this.enabled($(this.formName).find("textarea")); //激活
         };
-
 
     };
 	
