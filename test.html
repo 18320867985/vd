@@ -163,8 +163,8 @@
         </section>
 
         <!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
-        <script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
-        <!--<script src="mobile.js" type="text/javascript" charset="utf-8"></script>-->
+        <!--<script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>-->
+        <script src="mobile.js" type="text/javascript" charset="utf-8"></script>
         <script src="vd-1.0.4.js" type="text/javascript" charset="utf-8"></script>
 
         <script>
@@ -209,12 +209,12 @@
 
            // remote 验证验证之前触发
             $(document).on("onremotebefore", function (e) {
-                console.log("onremotebefore",e.detail)
+                console.log("onremotebefore", e.target)
             })
 
             // remote 验证验证完成触发
             $(document).on("onremoteafter", function (e) {
-                console.log("onremoteafter",e.detail)
+                 console.log("onremoteafter",e.target)
             })
 
             

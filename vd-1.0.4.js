@@ -466,10 +466,8 @@ var vd = (function() {
             }
 
             // 复选框
-   
             if (_ck !== null) {
           
-                console.log("ck", el.checked);
                 if (el.checked) {
                     _obj2.errorMsg = "";
                     _obj2.val = _ck_true !== null ? _ck_true : _ck_value;
@@ -823,6 +821,7 @@ var vd = (function() {
             });
 
           
+
             $("[type=checkbox]", p).each(function () {
                 $(this)[0].checked = false;
 
