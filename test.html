@@ -37,7 +37,7 @@
                     <li class="mui-table-view-cell mui-clearfix vd-box">
                         <label for="">手机:</label>
 
-                        <input class="vd-item" type="text" vd-req vd-req-msg="手机号码不能为空" vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" vd-remote="json/remote.json" vd-remote-msg="手机号码已存在" name="c" id="" value="" placeholder="输入正确手机号码" />
+                        <input class="vd-item" type="text" vd-req vd-req-msg="手机号码不能为空" vd-pattern="^1\d{10}$" vd-pattern-msg="手机格式不对" maxlength="11" vd-remote="json/remote.json" vd-remote-msg="手机号码已存在" name="c" id="" value="138" placeholder="输入正确手机号码"  />
 
                         <span class="vd-dep-btn   mui-btn">发送验证码</span>
 
@@ -128,10 +128,11 @@
 
                     </li>
 
-                    <li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
+                 
+
                     <li class="textarea-box mui-table-view-cell mui-clearfix mui-text-left vd-box">
                         <label for="">自动登陆:</label>
-                        <input class="vd-item" type="checkbox" name="ck" vd-ck vd-ck-true="1" vd-ck-false="0" />
+                        <input class="vd-item" type="checkbox" name="ck" vd-ck vd-ck-true="1" vd-ck-false="0" checked  />
                         <br />
                         <span class="vd-req "></span>
                     </li>
@@ -143,7 +144,7 @@
 
                         <div class="mui-col-xs-8 check-box">
                             <div class="check-item mui-pull-left">
-                                <input class=" vd-item" name="def" type="checkbox" id="inpu_5" vd-ck vd-ck-true="1" vd-ck-false="0" vd-req vd-req-msg="没有同意协议">
+                                <input class="vd-item" name="def" type="checkbox" id="inpu_5" vd-req vd-ck vd-ck-true="1" vd-ck-false="0" v vd-req-msg="没有同意协议">
 
                             </div>
 
@@ -162,8 +163,8 @@
         </section>
 
         <!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
-        <!--<script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>-->
-        <script src="mobile.js" type="text/javascript" charset="utf-8"></script>
+        <script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="mobile.js" type="text/javascript" charset="utf-8"></script>-->
         <script src="vd-1.0.4.js" type="text/javascript" charset="utf-8"></script>
 
         <script>
@@ -182,7 +183,7 @@
                 vd1.isSuccess(function (obj) {
                     setTimeout(function () {
                         vd1.reset();
-						vd1.init();
+	
                         alert(JSON.stringify(obj));
 
                     }, 3000);
