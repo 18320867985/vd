@@ -182,6 +182,7 @@
                 vd1.isSuccess(function (obj) {
                     setTimeout(function () {
                         vd1.reset();
+						vd1.init();
                         alert(JSON.stringify(obj));
 
                     }, 3000);
@@ -205,12 +206,12 @@
 
             });
 
-           // vd-dep-btn 验证验证之前触发
+           // remote 验证验证之前触发
             $(document).on("onremotebefore", function (e) {
                 console.log("onremotebefore",e.detail)
             })
 
-            // vd-dep-btn 验证验证完成触发
+            // remote 验证验证完成触发
             $(document).on("onremoteafter", function (e) {
                 console.log("onremoteafter",e.detail)
             })
