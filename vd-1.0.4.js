@@ -5,10 +5,10 @@
  version:1.0.0
 */
 window._vd =window.vd;
-var vd = (function() {
+(function() {
     "use strict";
 	
-    var Obj = function (formName) {
+  var obj = function (formName) {
 
         this.formName = typeof formName === "undefined" ? ".form" : formName;
 
@@ -861,10 +861,10 @@ var vd = (function() {
 
 
     };
-	
-		return {
+
+    window.vd = {
 			create: function(formName) {
-				return new Obj(formName);
+				return new obj(formName);
 			}
 		};
 			
