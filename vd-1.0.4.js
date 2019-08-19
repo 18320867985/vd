@@ -5,6 +5,7 @@
  version:1.0.0
 */
 window._vd =window.vd;
+
 (function() {
     "use strict";
 	
@@ -199,7 +200,6 @@ window._vd =window.vd;
                 var _obj = this.arrs[i];
                 var el = _obj.el; // document.forms[_obj.pName][_obj.elName];
                 var $this = this;
-				
                 $(el).on("keyup", _obj, function (event) {
                     $this.checkElement(event.data, event.target, true, true);
                     $this.addVdBtnStyle();
@@ -749,9 +749,11 @@ window._vd =window.vd;
             var $vd_btn = $(".vd-btn", p);
 
             if (this.vdIsOk()) {
+                p.removeClass("vd-error").addClass("vd-ok");
                 $vd_btn.removeClass("vd-error").addClass("vd-ok");
 
             } else {
+                p.removeClass("vd-ok").addClass("vd-error");
                 $vd_btn.removeClass("vd-ok").addClass("vd-error");
 
             }
