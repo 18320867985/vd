@@ -5,10 +5,10 @@
  version:1.0.0
 */
 window._vd =window.vd;
-var vd = (function() {
+(function() {
     "use strict";
 	
-    var Obj = function (formName) {
+  var obj = function (formName) {
 
         this.formName = typeof formName === "undefined" ? ".form" : formName;
 
@@ -199,6 +199,7 @@ var vd = (function() {
                 var _obj = this.arrs[i];
                 var el = _obj.el; // document.forms[_obj.pName][_obj.elName];
                 var $this = this;
+				
                 $(el).on("keyup", _obj, function (event) {
                     $this.checkElement(event.data, event.target, true, true);
                     $this.addVdBtnStyle();
@@ -556,7 +557,7 @@ var vd = (function() {
 
             // 单选组框
             var _rd_gp = _rd_parent.attr("vd-rd-gp");
-            var _rd_gp_true = _rd_parent.attr("vd-ck-true");
+           // var _rd_gp_true = _rd_parent.attr("vd-ck-true");
             var _rd_gp_req = _rd_parent.attr("vd-req");
             var _rd_gp_msg = _rd_parent.attr("vd-req-msg");
             if (typeof _rd_gp !== "undefined") {
@@ -608,7 +609,7 @@ var vd = (function() {
 
             // 是否全部验证成功
             var baseBl = true;
-            var arr_rd = {};
+           // var arr_rd = {};
             for (var i = 0; i < this.arrs.length; i++) {
                 var _obj = this.arrs[i];
 
@@ -622,7 +623,7 @@ var vd = (function() {
                 }
 
             }
-            var isFirst = true;
+           // var isFirst = true;
             if (baseBl) {
                 var newObj = this.getNewObjs();
                 if (typeof successFun === "function") {
@@ -861,10 +862,10 @@ var vd = (function() {
 
 
     };
-	
-		return {
+
+    window.vd = {
 			create: function(formName) {
-				return new Obj(formName);
+				return new obj(formName);
 			}
 		};
 			

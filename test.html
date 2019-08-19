@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 	<head>
@@ -109,7 +109,6 @@
                                 c#
                             </label>
 
-
                         </div>
                         <span class="vd-req "></span>
 
@@ -163,11 +162,11 @@
         </section>
 
         <!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
-        <!--<script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>-->
-        <script src="mobile.js" type="text/javascript" charset="utf-8"></script>
+        <script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+     <!--  <script src="mobile.js" type="text/javascript" charset="utf-8"></script> -->
         <script src="vd-1.0.4.js" type="text/javascript" charset="utf-8"></script>
 
-        <script>
+        // <script>
             // 初始化验证对象
             var vd1 = vd.create(".form1");
             vd1.init();
@@ -191,7 +190,7 @@
                 }, function (obj) {
 
                     obj.el.focus();
-                    //console.log(obj.errorMsg)
+                    console.log(obj)
 
                 });
             });
