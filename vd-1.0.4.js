@@ -2,7 +2,7 @@
    作者：724485868@qq.com
    时间：2017-10-08
    描述：表单验证    
- version:1.0.0
+ version:1.0.4
 */
 window._vd =window.vd;
 
@@ -43,7 +43,13 @@ window._vd =window.vd;
             }
             for (var i = 0; i < this.arrs.length; i++) {
                 if ($.trim(this.arrs[i].elName) === $.trim(compareName)) {
-                    $(el).trigger("keyup");
+					if(window.addEventListener){
+						$(el).trigger("input");
+						
+					}else{
+						 $(el).trigger("keyup");
+					}
+                   
                     break;
                 }
 
@@ -200,10 +206,18 @@ window._vd =window.vd;
                 var _obj = this.arrs[i];
                 var el = _obj.el; // document.forms[_obj.pName][_obj.elName];
                 var $this = this;
-                $(el).on("keyup", _obj, function (event) {
-                    $this.checkElement(event.data, event.target, true, true);
-                    $this.addVdBtnStyle();
-                });
+				if(window.addEventListener){
+					 $(el).on("input", _obj, function (event) {
+					    $this.checkElement(event.data, event.target, true, true);
+					    $this.addVdBtnStyle();
+					});
+				}else{
+					 $(el).on("keyup", _obj, function (event) {
+					    $this.checkElement(event.data, event.target, true, true);
+					    $this.addVdBtnStyle();
+					});
+				}
+               
 
                 var remote = el.getAttribute("vd-remote");
                 if (remote === null) {
@@ -602,6 +616,7 @@ window._vd =window.vd;
         };
 
         this.isSubmit = true;
+		
         this.isSuccess = function (successFun, errorFun) {
 
             // 添加错误样式
