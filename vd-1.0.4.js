@@ -4,6 +4,7 @@
    描述：表单验证    
  version:1.0.4
 */
+
 window._vd =window.vd;
 
 (function() {
