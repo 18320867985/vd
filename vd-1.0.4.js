@@ -2,13 +2,15 @@
    作者：724485868@qq.com
    时间：2017-10-08
    描述：表单验证    
- version:1.0.0
+ version:1.0.4
 */
+
 window._vd =window.vd;
-var vd = (function() {
+
+(function() {
     "use strict";
 	
-    var Obj = function (formName) {
+  var obj = function (formName) {
 
         this.formName = typeof formName === "undefined" ? ".form" : formName;
 
@@ -42,7 +44,13 @@ var vd = (function() {
             }
             for (var i = 0; i < this.arrs.length; i++) {
                 if ($.trim(this.arrs[i].elName) === $.trim(compareName)) {
-                    $(el).trigger("keyup");
+					if(window.addEventListener){
+						$(el).trigger("input");
+						
+					}else{
+						 $(el).trigger("keyup");
+					}
+                   
                     break;
                 }
 
@@ -167,7 +175,7 @@ var vd = (function() {
                 if (typeof _rd_gp_attr !== "undefined") {
 
                     var _rd_gp_length = $(this).find("[type=radio]:checked").length;
-                    var p = $(this).parents(".vd-box");
+                     p = $(this).parents(".vd-box");
                     // 没有选择
                     if (_rd_gp_length <= 0 && typeof _rd_gp_req !== "undefined") {
 
@@ -199,10 +207,18 @@ var vd = (function() {
                 var _obj = this.arrs[i];
                 var el = _obj.el; // document.forms[_obj.pName][_obj.elName];
                 var $this = this;
-                $(el).on("keyup", _obj, function (event) {
-                    $this.checkElement(event.data, event.target, true, true);
-                    $this.addVdBtnStyle();
-                });
+				if(window.addEventListener){
+					 $(el).on("input", _obj, function (event) {
+					    $this.checkElement(event.data, event.target, true, true);
+					    $this.addVdBtnStyle();
+					});
+				}else{
+					 $(el).on("keyup", _obj, function (event) {
+					    $this.checkElement(event.data, event.target, true, true);
+					    $this.addVdBtnStyle();
+					});
+				}
+               
 
                 var remote = el.getAttribute("vd-remote");
                 if (remote === null) {
@@ -271,7 +287,7 @@ var vd = (function() {
                         _obj2.bl = false;
                         _obj2.val = v;
                         _obj2.errorMsg = _req_msg;
-                        var p = $(el).parents(".vd-box");
+                         p = $(el).parents(".vd-box");
                         $(p).removeClass("vd-pattern vd-remote vd-compare").addClass("vd-error  ");
 
                         $(p).find(".vd-req,.vd-pattern,.vd-remote,.vd-compare").removeClass("vd-error");
@@ -280,7 +296,7 @@ var vd = (function() {
                         $(p).removeClass("vd-ok ");
 
                         $(".vd-dep-btn", p).addClass("vd-error").removeClass("vd-ok"); //依赖按钮
-
+                      
                         return;
                     } else {
                         p = $(el).parents(".vd-box");
@@ -309,7 +325,7 @@ var vd = (function() {
             }
 
             // 正则验证
-            if (_pattern !== null && v != "") {
+            if (_pattern !== null && v !== "") {
 
                 var reg = new RegExp(_pattern, "i");
                 if (!reg.test(v)) {
@@ -331,7 +347,7 @@ var vd = (function() {
                     _obj2.errorMsg = "";
                     _obj2.val = v;
                     _obj2.bl = true;
-                    var p = $(el).parents(".vd-box");
+                     p = $(el).parents(".vd-box");
                     $(p).removeClass("vd-error ");
 
                     $(p).find(".vd-pattern").removeClass("vd-error").text("");
@@ -395,9 +411,9 @@ var vd = (function() {
 
             }
 
-            if (_remote != null) {
+            if (_remote !== null) {
 
-                var _index = _remote_length != null ? _remote_length : 0;
+                var _index = _remote_length !== null ? _remote_length : 0;
                 if (v.length < _index) {
                     _obj2.errorMsg = _remote_msg;
                     _obj2.bl = false;
@@ -467,7 +483,7 @@ var vd = (function() {
 
             // 复选框
             if (_ck !== null) {
-
+          
                 if (el.checked) {
                     _obj2.errorMsg = "";
                     _obj2.val = _ck_true !== null ? _ck_true : _ck_value;
@@ -556,7 +572,7 @@ var vd = (function() {
 
             // 单选组框
             var _rd_gp = _rd_parent.attr("vd-rd-gp");
-            var _rd_gp_true = _rd_parent.attr("vd-ck-true");
+           // var _rd_gp_true = _rd_parent.attr("vd-ck-true");
             var _rd_gp_req = _rd_parent.attr("vd-req");
             var _rd_gp_msg = _rd_parent.attr("vd-req-msg");
             if (typeof _rd_gp !== "undefined") {
@@ -566,7 +582,7 @@ var vd = (function() {
                 p = $(el).parents(".vd-box");
 
                 // 没有选择
-                if (_rd_gp_length <= 0 && typeof _rd_gp_req !== null) {
+                if (_rd_gp_length <= 0 &&  _rd_gp_req !== null) {
 
                     p.removeClass("vd-ok");
                     p.addClass("vd-error");
@@ -601,6 +617,7 @@ var vd = (function() {
         };
 
         this.isSubmit = true;
+		
         this.isSuccess = function (successFun, errorFun) {
 
             // 添加错误样式
@@ -608,7 +625,7 @@ var vd = (function() {
 
             // 是否全部验证成功
             var baseBl = true;
-            var arr_rd = {};
+           // var arr_rd = {};
             for (var i = 0; i < this.arrs.length; i++) {
                 var _obj = this.arrs[i];
 
@@ -622,7 +639,7 @@ var vd = (function() {
                 }
 
             }
-            var isFirst = true;
+           // var isFirst = true;
             if (baseBl) {
                 var newObj = this.getNewObjs();
                 if (typeof successFun === "function") {
@@ -748,9 +765,11 @@ var vd = (function() {
             var $vd_btn = $(".vd-btn", p);
 
             if (this.vdIsOk()) {
+                p.removeClass("vd-error").addClass("vd-ok");
                 $vd_btn.removeClass("vd-error").addClass("vd-ok");
 
             } else {
+                p.removeClass("vd-ok").addClass("vd-error");
                 $vd_btn.removeClass("vd-ok").addClass("vd-error");
 
             }
@@ -768,7 +787,7 @@ var vd = (function() {
 
                 for (var i = 0; i < this.arrs.length; i++) {
                     var obj = this.arrs[i];
-                    if (obj.elName == name) {
+                    if (obj.elName === name) {
                         el = obj.el;
                         this.checkElement(obj, el, false, false); // false 不去remote验证    isRadio不做比
                         break;
@@ -808,18 +827,29 @@ var vd = (function() {
         };
 
         this.reset = function () {
-
+           
             this.isSubmit = true;
             var p = $(this.formName);
-            $(".vd-item", p).val("");
+            $(".vd-item", p).each(function (item) {
+
+                $(this).val("");
+
+                if ($(this)[0].hasAttribute("vd-ck")) {
+                    $(this).val(0);
+                }
+            });
+
+          
+
             $("[type=checkbox]", p).each(function () {
                 $(this)[0].checked = false;
+
             });
             $("[type=radio]", p).each(function () {
                 $(this)[0].checked = false;
 
             });
-
+          
             this.check();
             this._valStyle(p);
             var vdBtn = $(".vd-btn", this.formName);
@@ -850,10 +880,10 @@ var vd = (function() {
 
 
     };
-	
-		return {
+
+    window.vd = {
 			create: function(formName) {
-				return new Obj(formName);
+				return new obj(formName);
 			}
 		};
 			
