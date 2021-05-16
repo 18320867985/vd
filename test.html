@@ -45,7 +45,7 @@
                         <span class="vd-pattern"> </span>
                         <span class="vd-remote"> </span>
 
-                        <p class="loading">正在发送中...</p>
+                        <p class="loading  mui-hidden">正在验证中...</p>
                     </li>
                     <li class="mui-table-view-cell mui-row mui-clearfix vd-box">
                         <label for="">验证码:</label>
@@ -164,7 +164,7 @@
         <!--<script src="zepto/zepto.js" type="text/javascript" charset="utf-8"></script>-->
         <script src="jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
      <!--  <script src="mobile.js" type="text/javascript" charset="utf-8"></script> -->
-        <script src="vd-1.0.4.js" type="text/javascript" charset="utf-8"></script>
+        <script src="vd.js" type="text/javascript" charset="utf-8"></script>
 
          <script>
             // 初始化验证对象
@@ -208,12 +208,14 @@
 
            // remote 验证验证之前触发
             $(document).on("onremotebefore", function (e) {
-                console.log("onremotebefore", e.target)
+                console.log("onremotebefore", e.target);
+				$(".loading").show();
             })
 
             // remote 验证验证完成触发
             $(document).on("onremoteafter", function (e) {
-                 console.log("onremoteafter",e.target)
+                 console.log("onremoteafter",e.target);
+				 $(".loading").hide();
             })
 
             
